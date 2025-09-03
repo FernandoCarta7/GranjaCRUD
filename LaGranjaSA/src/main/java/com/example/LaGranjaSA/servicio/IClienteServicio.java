@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IClienteServicio {
     public List<Cliente> getClientes();
-    public Cliente saveCliente();
+    public Cliente saveCliente(Cliente cliente);
     public Cliente findClienteById(String id);
     public void deleteClienteById(String id);
 }

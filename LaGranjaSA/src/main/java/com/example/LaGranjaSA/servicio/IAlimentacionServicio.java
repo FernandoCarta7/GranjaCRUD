@@ -7,8 +7,8 @@ import java.util.List;
 public interface IAlimentacionServicio {
 
     public List<Alimentacion> getAlimentos();
-    public Alimentacion findById(String id);
-    public Alimentacion saveAlimentacion();
-    public void deleteById(String id);
+    public Alimentacion findById(int id);
+    public Alimentacion saveAlimentacion(Alimentacion alimentacion);
+    public void deleteById(int id);
 
 }
