@@ -6,18 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "porcino")
-public class Porcino {
+@Table(name = "raza")
+public class Raza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_porcino;
-    private int id_raza;
-    private LocalDate fecha_nacimiento;
-    private float peso;
+    private int id;
+    private String raza;
 }

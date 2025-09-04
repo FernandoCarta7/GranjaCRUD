@@ -3,21 +3,23 @@ package com.example.LaGranjaSA.servicio;
 import com.example.LaGranjaSA.modelo.Porcino;
 import com.example.LaGranjaSA.repositorio.PorcinoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PorcinoServicio implements IPorcinoServicio{
 
     @Autowired
     PorcinoRepositorio porcinoRepositorio;
 
     @Override
-    public Porcino findPorcinoById(int id) {
+    public Porcino getPorcinoById(int id) {
         return porcinoRepositorio.findById(id).orElse(null);
     }
 
     @Override
-    public List<Porcino> findPorcinos() {
+    public List<Porcino> getPorcinos() {
         return porcinoRepositorio.findAll();
     }
 
@@ -29,7 +31,7 @@ public class PorcinoServicio implements IPorcinoServicio{
 
     @Override
     public void deletePorcinoById(int id) {
-        Porcino porcino = findPorcinoById(id);
+        Porcino porcino = getPorcinoById(id);
         if (porcino != null) porcinoRepositorio.deleteById(id);
 
     }
