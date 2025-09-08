@@ -17,7 +17,7 @@ public class Porcino {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_porcino;
-    private int id_raza;
+    private String raza;
     private LocalDate fecha_nacimiento;
     private float peso;
 }

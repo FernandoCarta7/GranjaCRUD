@@ -18,6 +18,7 @@ public class InicioController {
     @Autowired
     PorcinoServicio porcinoServicio;
 
+
     @GetMapping("/getClientes")
     public List<Cliente> getClientes(){
         return clienteServicio.getClientes();
