@@ -1,17 +1,17 @@
 <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Inicio</a>
+    <a class="navbar-brand">Inicio</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Porcinos</a>
+          <button class="nav-link active" (click)="goToPorcinos()">Porcinos</button>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Integrantes</a>
+          <button class="nav-link" (click)="goToClientes()">Clientes</button>
         </li>
         
       </ul>

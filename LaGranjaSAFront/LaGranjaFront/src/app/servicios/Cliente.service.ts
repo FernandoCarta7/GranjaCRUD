@@ -8,7 +8,7 @@ import { Cliente } from "../model/Cliente";
 })
 export class ClienteService {
     
-    private urlBase = "http://localhost:8080/";
+    private urlBase = "http://localhost:8080/inicio/getClientes";
     
     constructor (private http : HttpClient){}
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'nav-bar',
@@ -8,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class NavBar {
 
+  constructor(private router: Router) {
+
+  }
+
+  goToClientes() {
+    this.router.navigate(['/listado-clientes']);
+  }
+  goToPorcinos() {
+    this.router.navigate(['/listado-porcino']);
+  }
 }

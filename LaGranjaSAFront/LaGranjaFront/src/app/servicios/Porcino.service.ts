@@ -8,11 +8,13 @@ import { Porcino } from "../model/Porcino";
 })
 export class PorcinoService {
     
-    private urlBase = "http://localhost:8080/";
+    private urlBase = "http://localhost:8080/inicio/getPorcinos";
     
     constructor (private http : HttpClient){}
 
     getPorcinos() : Observable<Porcino []> {
+        var lista = this.http.get<Porcino[]>(this.urlBase);
+        console.log(lista);
         return this.http.get<Porcino[]>(this.urlBase);
     }
     addPorcino( porcino : Porcino) : Observable <Object>{
