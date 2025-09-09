@@ -1,0 +1,33 @@
+<br>
+<div class="container">
+
+    <div class="input-group mb-3">
+        <span class="input-group-text">Cedula</span>
+
+        <input type="text" class="form-control" [(ngModel)]="cedula"/>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text">Nombres</span>
+        <input type="text" class="form-control"  [(ngModel)]="nombres"/>
+
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text">Apellidos</span>
+
+        <input type="text" class="form-control" [(ngModel)]="apellidos"/>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text">Direccion</span>
+        <input type="text" class="form-control"[(ngModel)]="direccion"/>
+
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text">Telefono</span>
+        <input type="text" class="form-control" [(ngModel)]="telefono"/>
+
+    </div>
+    <button class="btn botonPrimario" (click)="onSubmit()">Guardar</button>
+</div>

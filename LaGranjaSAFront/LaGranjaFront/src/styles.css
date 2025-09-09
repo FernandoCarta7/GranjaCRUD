@@ -1,14 +1,33 @@
+:root {
+    --color-primario: #A27B5C;  
+    --color-secundario: #2C3930; 
+    --color-terciario: #DCD7C9;  
+    --color-rojo-intenso: #FF0B55;
+    --color-negro-mate: rgb(55, 53, 62);
+    --color-azul-oscuro: rgb(30, 62, 98);
+    --color-verde-fluorecente: rgb(190, 215, 84);
+}
+
+
 body {
-    background-color: rgb(241, 240, 228) !important;
+    background-color: #D3DAD9!important;
 }
 
 .rojoDanger {
-    color: rgb(220, 20, 60) !important;
+    color: var(--color-rojo-intenso)!important;
 }
 
 .lila{
-    color: #5D688A !important;
+    color: rgb(93, 104, 138) !important;
 }
 .margin2{
     margin: 0.2rem;
+}
+
+.botonPrimario{
+    background-color: var(--color-azul-oscuro) !important;
+    
+}
+.btnVerdeF{
+    background-color: var(--color-verde-fluorecente) !important;
 }
