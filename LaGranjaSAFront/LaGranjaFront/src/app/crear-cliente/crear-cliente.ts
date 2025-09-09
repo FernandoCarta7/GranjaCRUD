@@ -13,12 +13,14 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './crear-cliente.css'
 })
 export class CrearCliente {
-  public cliente : Cliente;
+  public cliente: Cliente;
   public cedula: String;
   public nombres: String;
   public apellidos: String;
   public direccion: String;
   public telefono: String;
+  public showAlert: boolean = false;
+  public mensaje: string = "";
   //this.cliente = new Cliente();
   constructor(private http: HttpClient,
     private clienteServicio: ClienteService,
@@ -36,11 +38,21 @@ export class CrearCliente {
     this.router.navigate(['/listado-clientes']);
   }
   guardarCliente() {
-    this.cliente = new Cliente(this.cedula,this.nombres,this.apellidos,this.direccion,this.telefono);
+    this.cliente = new Cliente(this.cedula, this.nombres, this.apellidos, this.direccion, this.telefono);
 
     this.clienteServicio.addCliente(this.cliente).subscribe({
       next: (datos) => {
+        this.mensaje = "Cliente guardado exitosamente ✅";
+        this.showAlert = true;
+
+        // ⏳ después de 2 segundos, redirige al listado
+        setTimeout(() => {
+          this.goToClientes();
+        }, 2000);
         this.goToClientes();
+      }, error: () => {
+        this.mensaje = "❌ Error al guardar el cliente";
+        this.showAlert = true;
       }
     })
   }
