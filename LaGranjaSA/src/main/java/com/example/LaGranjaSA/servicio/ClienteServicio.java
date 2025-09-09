@@ -5,6 +5,7 @@ import com.example.LaGranjaSA.repositorio.ClienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,7 +16,10 @@ public class ClienteServicio implements IClienteServicio {
 
     @Override
     public List<Cliente> getClientes() {
-        return clienteRepositorio.findAll();
+        List<Cliente> clientes = new ArrayList<>();
+        clientes =  clienteRepositorio.findAll();
+        clientes.sort((a,b) -> a.getNombres().compareTo(b.getNombres()));
+        return clientes;
     }
 
     @Override

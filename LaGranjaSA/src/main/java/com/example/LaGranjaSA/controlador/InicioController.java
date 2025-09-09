@@ -29,4 +29,9 @@ public class InicioController {
         return porcinoServicio.getPorcinos();
     }
 
+    @PostMapping("/guardarCliente")
+    public Cliente guardarCliente(@RequestBody Cliente cliente){
+        return clienteServicio.saveCliente(cliente);
+    }
+
 }
