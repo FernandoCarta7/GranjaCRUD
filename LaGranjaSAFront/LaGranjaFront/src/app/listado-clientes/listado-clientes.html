@@ -1,6 +1,6 @@
 <br>
 <div class="container">
-    <table class="table table-dark">
+    <table class="table ">
         <thead>
             <tr>
 
@@ -19,8 +19,8 @@
                 <td>{{ item.direccion }}</td>
                 <td>{{ item.telefono }}</td>
                 <td>
-                    <i class="bi bi-pencil btn lila margin2"></i>
-                    <i class="bi bi-trash3 btn rojoDanger margin2"></i>
+                    <button class="bi bi-pencil btn colorAzul margin2"></button>
+                    <button class="bi bi-trash3 btn rojoDanger margin2" (click)="deleteCliente(item.cedula)"></button>
                 </td>
             </tr>
             }
@@ -28,8 +28,8 @@
         </tbody>
     </table>
 
-    <button type="button" class="btn botonPrimario" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Agregarcliente nuevo
+    <button type="button" class="btn colorAzul" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <i class="bi bi-plus"></i> Cliente nuevo
     </button>
 </div>
 <!-- Button trigger modal -->
@@ -38,8 +38,8 @@
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content ">
-            <div class="modal-header">
+        <div class="modal-content">
+            <div class="modal-header colorAzul">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Cliente nuevo</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -47,8 +47,9 @@
                 <crear-cliente></crear-cliente>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn rojoDanger" data-bs-dismiss="modal">Cerrar</button>
-                
+                <button type="button" class="btn rojoDanger" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
+                    Cerrar</button>
+
             </div>
         </div>
     </div>

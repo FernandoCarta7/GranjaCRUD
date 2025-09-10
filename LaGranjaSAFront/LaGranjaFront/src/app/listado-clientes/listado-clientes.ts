@@ -14,6 +14,11 @@ import { CrearCliente } from "../crear-cliente/crear-cliente";
 export class ListadoClientes {
   clientes: Cliente[];
   constructor(private clienteService: ClienteService, private router: Router) { }
+
+  goToClientes() {
+    this.router.navigate(['/listado-clientes']);
+  }
+
   ngOnInit() {
 
     this.getListClientes();
@@ -23,6 +28,19 @@ export class ListadoClientes {
       (response => {
         this.clientes = response
       })
+    )
+  }
+
+  editCliente(cedula: String) {
+    //ToDo
+  }
+
+  deleteCliente(cedula: String) {
+    this.clienteService.deleteCliente(cedula).subscribe(
+      {
+        next: () => this.getListClientes()
+
+      }
     )
   }
 

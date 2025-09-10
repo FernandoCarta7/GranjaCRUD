@@ -1,33 +1,46 @@
 :root {
-    --color-primario: #A27B5C;  
-    --color-secundario: #2C3930; 
-    --color-terciario: #DCD7C9;  
-    --color-rojo-intenso: #FF0B55;
-    --color-negro-mate: rgb(55, 53, 62);
+    --color-primario: #A27B5C;
+    --color-secundario: #2C3930;
+    --color-terciario: #DCD7C9;
+    --color-rojo-intenso: rgb(255, 63, 51);
+    --color-negro-mate: rgb(33, 15, 55);
     --color-azul-oscuro: rgb(30, 62, 98);
-    --color-verde-fluorecente: rgb(190, 215, 84);
+    --color-verde-fluorecente: rgb(157, 241, 223);
 }
 
 
 body {
-    background-color: #D3DAD9!important;
+    background-color: #D3DAD9 !important;
 }
 
 .rojoDanger {
-    color: var(--color-rojo-intenso)!important;
+    background-color: var(--color-rojo-intenso) !important;
+    color: var(--color-terciario) !important;
 }
 
-.lila{
-    color: rgb(93, 104, 138) !important;
+.lila {
+    color: var(--color-verde-fluorecente) !important;
 }
-.margin2{
+
+.margin2 {
     margin: 0.2rem;
 }
 
-.botonPrimario{
+.colorAzul {
     background-color: var(--color-azul-oscuro) !important;
-    
+    color: var(--color-terciario) !important;
 }
-.btnVerdeF{
+
+.negroMate{
+    background-color: var(--color-secundario) !important;
+    color: var(--color-terciario) !important;
+}
+
+.botonPrimario {
+    background-color: var(--color-azul-oscuro) !important;
+    color: var(--color-terciario) !important;
+}
+
+.btnVerdeF {
     background-color: var(--color-verde-fluorecente) !important;
 }

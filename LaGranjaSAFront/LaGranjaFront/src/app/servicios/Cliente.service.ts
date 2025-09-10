@@ -4,24 +4,25 @@ import { Observable } from "rxjs";
 import { Cliente } from "../model/Cliente";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ClienteService {
-    
+
     private urlBase = "http://localhost:8080/inicio/getClientes";
     private urlGuardarClientes = "http://localhost:8080/inicio/guardarCliente";
-    constructor (private http : HttpClient){}
+    private urlDelete = "http://localhost:8080/inicio/deleteCliente";
+    constructor(private http: HttpClient) { }
 
-    getClientes() : Observable<Cliente []> {
+    getClientes(): Observable<Cliente[]> {
         return this.http.get<Cliente[]>(this.urlBase);
     }
-    addCliente( cliente : Cliente) : Observable <Object>{
+    addCliente(cliente: Cliente): Observable<Object> {
         return this.http.post(this.urlGuardarClientes, cliente);
     }
-    editCliente(id:number, cliente : Cliente) : Observable<Object>{
-        return this.http.put(`${this.urlBase}/${id}`, cliente);
+    editCliente(cedula: String, cliente: Cliente): Observable<Object> {
+        return this.http.put(`${this.urlBase}/${cedula}`, cliente);
     }
-    deleteCliente(id : number) : Observable<Object>{
-        return this.http.delete(`${this.urlBase}/${id}`);
+    deleteCliente(cedula: String): Observable<Object> {
+        return this.http.delete(`${this.urlDelete}/${cedula}`);
     }
 }
