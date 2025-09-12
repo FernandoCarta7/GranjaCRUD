@@ -21,6 +21,7 @@ export class ListadoPorcino {
 
     this.getListPorcinos();
   }
+
   private getListPorcinos() {
     this.porcinoService.getPorcinos().subscribe(
       (response => {
@@ -28,4 +29,15 @@ export class ListadoPorcino {
       })
     )
   }
+
+  editPorcino(id_porcino: number) {
+    this.router.navigate(['editar-porcino', id_porcino]);
+  }
+
+  deletePorcino(id_porcino: number) {
+    this.porcinoService.deletePorcino(id_porcino).subscribe({
+      next: () => this.getListPorcinos()
+    })
+  }
+
 }

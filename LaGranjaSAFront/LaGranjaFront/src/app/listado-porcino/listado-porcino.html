@@ -3,27 +3,29 @@
     <table class="table ">
         <thead>
             <tr>
-
                 <th scope="col">Raza</th>
                 <th scope="col">Edad</th>
                 <th scope="col">Peso [kg]</th>
                 <th scope="col">Accion</th>
-
             </tr>
         </thead>
         <tbody>
             @for (porcino of porcinos; track $index) {
-                <tr>
-                    <td>{{ porcino.raza }}</td>
-                    <td>{{ porcino.edad }}</td>
-                    <td>{{ porcino.peso }}</td>
-                    <td>
-                        <i class="bi bi-pencil btn colorAzul margin2"></i>
-                        <i class="bi bi-trash3 btn rojoDanger margin2"></i>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ porcino.raza }}</td>
+                <td>{{ porcino.edad }}</td>
+                <td>{{ porcino.peso }}</td>
+                <td>
+                    <button class="btn colorAzul margin2">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn rojoDanger margin2" (click)="deletePorcino(porcino.id_porcino)">
+                        <i class="bi bi-trash3"></i>
+                    </button>
+                </td>
+            </tr>
             }
-        
+
         </tbody>
     </table>
     <button class="btn colorAzul"><i class="bi bi-plus"></i> Nuevo porcino</button>

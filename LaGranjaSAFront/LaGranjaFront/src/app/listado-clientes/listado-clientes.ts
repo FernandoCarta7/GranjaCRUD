@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { ClienteService } from '../servicios/Cliente.service';
 import { Router } from '@angular/router';
 import { CrearCliente } from "../crear-cliente/crear-cliente";
-import { EditarCliente } from "../editar-cliente/editar-cliente";
+
 
 @Component({
   selector: 'listado-clientes',
-  imports: [CommonModule, CrearCliente, EditarCliente],
+  imports: [CommonModule, CrearCliente],
   templateUrl: './listado-clientes.html',
   styleUrl: './listado-clientes.css'
 })

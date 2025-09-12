@@ -9,6 +9,7 @@ import { Porcino } from "../model/Porcino";
 export class PorcinoService {
     
     private urlBase = "http://localhost:8080/inicio/getPorcinos";
+    private urlDelete = "http://localhost:8080/inicio/deletePorcinoById"
     
     constructor (private http : HttpClient){}
 
@@ -23,7 +24,7 @@ export class PorcinoService {
     editPorcino(id:number, porcino : Porcino) : Observable<Object>{
         return this.http.put(`${this.urlBase}/${id}`, porcino);
     }
-    deletePorcino(id : number) : Observable<Object>{
-        return this.http.delete(`${this.urlBase}/${id}`);
+    deletePorcino(id_porcino : number) : Observable<Object>{
+        return this.http.delete(`${this.urlDelete}/${id_porcino}`);
     }
 }
