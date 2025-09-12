@@ -1,0 +1,31 @@
+<br>
+<div class="container">
+
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="bi bi-person-vcard"> </i></span>
+
+            <input type="text" class="form-control" placeholder="Cedula" [(ngModel)]="cliente.cedula" disabled="true" />
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="bi bi-person-lines-fill"> </i></span>
+            <input type="text" class="form-control" placeholder="Nombres" [(ngModel)]="cliente.nombres" />
+
+            <span class="input-group-text"><i class="bi bi-person-lines-fill"></i></span>
+
+            <input type="text" class="form-control" placeholder="Apellidos" [(ngModel)]="cliente.apellidos" />
+        </div>
+
+
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="bi bi-signpost-split-fill"></i></span>
+            <input type="text" class="form-control" placeholder="Direccion" [(ngModel)]="cliente.direccion" />
+
+            <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
+            <input type="text" class="form-control" placeholder="Telefono" [(ngModel)]="cliente.telefono" />
+        </div>
+
+        <button class="btn botonPrimario" (click)="onSubmit()"><i class="bi bi-floppy"></i> Guardar</button>
+
+</div>
+

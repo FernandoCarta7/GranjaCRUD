@@ -19,7 +19,7 @@
                 <td>{{ item.direccion }}</td>
                 <td>{{ item.telefono }}</td>
                 <td>
-                    <button class="bi bi-pencil btn colorAzul margin2"></button>
+                    <button class="bi bi-pencil btn colorAzul margin2" (click)="editCliente(item.cedula)"></button>
                     <button class="bi bi-trash3 btn rojoDanger margin2" (click)="deleteCliente(item.cedula)"></button>
                 </td>
             </tr>

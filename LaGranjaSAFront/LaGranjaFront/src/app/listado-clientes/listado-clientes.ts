@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { ClienteService } from '../servicios/Cliente.service';
 import { Router } from '@angular/router';
 import { CrearCliente } from "../crear-cliente/crear-cliente";
+import { EditarCliente } from "../editar-cliente/editar-cliente";
 
 @Component({
   selector: 'listado-clientes',
-  imports: [CommonModule, CrearCliente],
+  imports: [CommonModule, CrearCliente, EditarCliente],
   templateUrl: './listado-clientes.html',
   styleUrl: './listado-clientes.css'
 })
@@ -32,7 +33,7 @@ export class ListadoClientes {
   }
 
   editCliente(cedula: String) {
-    //ToDo
+    this.router.navigate(['editar-cliente', cedula])
   }
 
   deleteCliente(cedula: String) {
