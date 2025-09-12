@@ -27,13 +27,18 @@ public class InicioController {
         return clienteServicio.getClientes();
     }
 
+    @GetMapping("/getClienteByCedula/{cedula}")
+    public Cliente getClienteByCedula(@PathVariable String cedula){
+        return clienteServicio.findClienteById(cedula);
+    }
+
     @GetMapping("/getPorcinos")
     public List<Porcino> getPorcinos(){
         return porcinoServicio.getPorcinos();
     }
 
-    @PostMapping("/guardarCliente")
-    public Cliente guardarCliente(@RequestBody Cliente cliente){
+    @PostMapping("/saveCliente")
+    public Cliente saveCliente(@RequestBody Cliente cliente){
         return clienteServicio.saveCliente(cliente);
     }
     @DeleteMapping("/deleteCliente/{cedula}")
@@ -44,6 +49,22 @@ public class InicioController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("Eliminado", true);
         return ResponseEntity.ok(response);
+    }
+    @PutMapping("/editarPaciente/{cedula}")
+    public ResponseEntity<Cliente> editarPaciente(
+            @PathVariable String cedula,
+            @RequestBody Cliente clienteRecibido){
+        Cliente cliente = this.clienteServicio.findClienteById(cedula);
+        if (cliente == null) return ResponseEntity.notFound().build();
+        else {
+            cliente.setApellidos(clienteRecibido.getApellidos());
+            cliente.setNombres(clienteRecibido.getNombres());
+            cliente.setDireccion(clienteRecibido.getDireccion());
+            cliente.setTelefono(clienteRecibido.getTelefono());
+            this.clienteServicio.saveCliente(cliente);
+            return ResponseEntity.ok(cliente);
+        }
+
     }
 
 }
