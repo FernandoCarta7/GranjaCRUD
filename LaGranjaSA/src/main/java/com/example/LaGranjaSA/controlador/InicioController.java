@@ -21,6 +21,13 @@ public class InicioController {
     @Autowired
     PorcinoServicio porcinoServicio;
 
+    /*
+    --------------------------------------------------------------------
+    --------------------------------------------------------------------
+    ------------------------------CLIENTES------------------------------
+    --------------------------------------------------------------------
+    --------------------------------------------------------------------
+     */
 
     @GetMapping("/getClientes")
     public List<Cliente> getClientes(){
@@ -32,10 +39,7 @@ public class InicioController {
         return clienteServicio.findClienteById(cedula);
     }
 
-    @GetMapping("/getPorcinos")
-    public List<Porcino> getPorcinos(){
-        return porcinoServicio.getPorcinos();
-    }
+
 
     @PostMapping("/saveCliente")
     public Cliente saveCliente(@RequestBody Cliente cliente){
@@ -67,4 +71,25 @@ public class InicioController {
 
     }
 
+    /*
+     --------------------------------------------------------------------
+     --------------------------------------------------------------------
+     ------------------------------PORCINOS------------------------------
+     --------------------------------------------------------------------
+     --------------------------------------------------------------------
+     */
+    @GetMapping("/getPorcinos")
+    public List<Porcino> getPorcinos(){
+        return porcinoServicio.getPorcinos();
+    }
+
+    @DeleteMapping("/deletePorcinoById/{id_porcino}")
+    public ResponseEntity<Map<String, Boolean>> deletePorcinoById(@PathVariable int id_porcino){
+        Porcino porcino = porcinoServicio.getPorcinoById(id_porcino);
+        if (porcino == null) return ResponseEntity.notFound().build();
+        this.porcinoServicio.deletePorcinoById(id_porcino);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("Eliminado", true);
+        return ResponseEntity.ok(response);
+    }
 }
