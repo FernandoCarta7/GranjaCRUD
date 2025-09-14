@@ -16,7 +16,7 @@
                 <td>{{ porcino.edad }}</td>
                 <td>{{ porcino.peso }}</td>
                 <td>
-                    <button class="btn colorAzul margin2">
+                    <button class="btn colorAzul margin2" (click)="editPorcino(porcino.id_porcino)">
                         <i class="bi bi-pencil"></i>
                     </button>
                     <button class="btn rojoDanger margin2" (click)="deletePorcino(porcino.id_porcino)">
@@ -28,6 +28,6 @@
 
         </tbody>
     </table>
-    <button class="btn colorAzul"><i class="bi bi-plus"></i> Nuevo porcino</button>
+    <button class="btn colorAzul" (click)="goToCrearPorcino()"><i class="bi bi-plus"></i> Nuevo porcino</button>
 </div>
 <!-- Scrollable modal -->

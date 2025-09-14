@@ -1,36 +1,41 @@
 <br>
 <div class="container">
     <!-- ALERTA -->
-  <div *ngIf="showAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ mensaje }}
-    <button type="button" class="btn-close" (click)="showAlert = false"></button>
-  </div>
+
+    @if(showAlert){
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ mensaje }}
+        <button type="button" class="btn-close" (click)="showAlert = false"></button>
+    </div>
+    }
+
+
     <div class="input-group mb-3">
         <span class="input-group-text"><i class="bi bi-person-vcard"> </i></span>
 
-        <input type="text" class="form-control" placeholder="Cedula" [(ngModel)]="cedula"/>
+        <input type="text" class="form-control" placeholder="Cedula" [(ngModel)]="cedula" />
     </div>
 
     <div class="input-group mb-3">
         <span class="input-group-text"><i class="bi bi-person-lines-fill"> </i></span>
-        <input type="text" class="form-control" placeholder="Nombres" [(ngModel)]="nombres"/>
+        <input type="text" class="form-control" placeholder="Nombres" [(ngModel)]="nombres" />
 
     </div>
 
     <div class="input-group mb-3">
         <span class="input-group-text"><i class="bi bi-person-lines-fill"></i></span>
 
-        <input type="text" class="form-control" placeholder="Apellidos" [(ngModel)]="apellidos"/>
+        <input type="text" class="form-control" placeholder="Apellidos" [(ngModel)]="apellidos" />
     </div>
 
     <div class="input-group mb-3">
         <span class="input-group-text"><i class="bi bi-signpost-split-fill"></i></span>
-        <input type="text" class="form-control" placeholder="Direccion" [(ngModel)]="direccion"/>
+        <input type="text" class="form-control" placeholder="Direccion" [(ngModel)]="direccion" />
 
     </div>
     <div class="input-group mb-3">
         <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
-        <input type="text" class="form-control" placeholder="Telefono" [(ngModel)]="telefono"/>
+        <input type="text" class="form-control" placeholder="Telefono" [(ngModel)]="telefono" />
 
     </div>
     <button class="btn botonPrimario" (click)="onSubmit()"><i class="bi bi-floppy"></i> Guardar</button>

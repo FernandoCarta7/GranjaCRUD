@@ -1,0 +1,36 @@
+<br>
+<div class="container">
+    <!-- ALERTA -->
+
+    @if(showAlert){
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ mensaje }}
+        <button type="button" class="btn-close" (click)="showAlert = false"></button>
+    </div>
+    }
+
+    <div class="input-group mb-3">
+        <select class="form-select" aria-placeholder="Seleccionar raza" aria-label="Default select example"
+            [(ngModel)]="porcino.raza">
+            <option selected>Seleccionar raza</option>
+            <option value="YORK">York</option>
+            <option value="HAMP">Hamp</option>
+            <option value="DUROC">Duroc</option>
+        </select>
+        <span class="input-group-text"><i class="bi bi-person-lines-fill"></i></span>
+
+        <input type="text" class="form-control" placeholder="Peso [kg]" [(ngModel)]="porcino.peso" />
+    </div>
+
+
+    <div class="input-group mb-3">
+        <span class="input-group-text"><i class="bi bi-person-lines-fill"> </i></span>
+        <input type="date" class="form-control" placeholder="Fecha de nacimiento" [(ngModel)]="porcino.fecha_nacimiento" />
+
+    </div>
+
+    <div class="input-group mb-3">
+    </div>
+
+    <button class="btn botonPrimario" (click)="onSubmit()"><i class="bi bi-floppy"></i> Guardar</button>
+</div>

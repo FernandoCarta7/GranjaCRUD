@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 
 
 @Component({
-  selector: 'app-listado-porcino',
+  selector: 'listado-porcino',
   imports: [CommonModule],
   templateUrl: './listado-porcino.html',
   styleUrl: './listado-porcino.css'
@@ -38,6 +38,10 @@ export class ListadoPorcino {
     this.porcinoService.deletePorcino(id_porcino).subscribe({
       next: () => this.getListPorcinos()
     })
+  }
+
+  goToCrearPorcino(){
+    this.router.navigate(['crear-porcino']);
   }
 
 }

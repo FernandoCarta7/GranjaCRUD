@@ -6,7 +6,7 @@ import { ClienteService } from '../servicios/Cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-editar-cliente',
+  selector: 'editar-cliente',
   imports: [CommonModule, FormsModule],
   templateUrl: './editar-cliente.html',
   styleUrl: './editar-cliente.css'
