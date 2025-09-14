@@ -92,4 +92,31 @@ public class InicioController {
         response.put("Eliminado", true);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/agregarPorcino")
+    public Porcino agregarPorcino (@RequestBody Porcino porcino){
+        return porcinoServicio.savePorcino(porcino);
+
+    }
+    @GetMapping("/getPorcinoByIdPorcino/{id_porcino}")
+    public Porcino getPorcinoById(@PathVariable int id_porcino){
+        var porcino =  porcinoServicio.getPorcinoById(id_porcino);
+        return porcinoServicio.getPorcinoById(id_porcino);
+    }
+    @PutMapping("/editarPorcino/{id_porcino}")
+    public ResponseEntity<Porcino> editarPorcino(
+            @PathVariable int id_porcino,
+            @RequestBody Porcino porcinoRecibido){
+        Porcino porcino = porcinoServicio.getPorcinoById(id_porcino);
+        if (porcino == null) return ResponseEntity.notFound().build();
+        else {
+            porcino.setRaza(porcinoRecibido.getRaza());
+            porcino.setPeso(porcinoRecibido.getPeso());
+            porcino.setFecha_nacimiento(porcinoRecibido.getFecha_nacimiento());
+
+            this.porcinoServicio.savePorcino(porcinoRecibido);
+            return ResponseEntity.ok(porcino);
+        }
+
+    }
 }
