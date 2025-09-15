@@ -21,6 +21,12 @@ public class InicioController {
     @Autowired
     PorcinoServicio porcinoServicio;
 
+    @Autowired
+    AlimentacionServicio alimentacionServicio;
+
+    @Autowired
+    RazaServicio razaServicio;
+
     /*
     --------------------------------------------------------------------
     --------------------------------------------------------------------
@@ -45,6 +51,8 @@ public class InicioController {
     public Cliente saveCliente(@RequestBody Cliente cliente){
         return clienteServicio.saveCliente(cliente);
     }
+
+
     @DeleteMapping("/deleteCliente/{cedula}")
     public ResponseEntity<Map<String, Boolean>> deleteCliente(@PathVariable String cedula){
         Cliente cliente = clienteServicio.findClienteById(cedula);
@@ -110,13 +118,79 @@ public class InicioController {
         Porcino porcino = porcinoServicio.getPorcinoById(id_porcino);
         if (porcino == null) return ResponseEntity.notFound().build();
         else {
-            porcino.setRaza(porcinoRecibido.getRaza());
+            porcino.getRaza().setDescripcion(porcinoRecibido.getRaza().getDescripcion());
             porcino.setPeso(porcinoRecibido.getPeso());
             porcino.setFecha_nacimiento(porcinoRecibido.getFecha_nacimiento());
 
             this.porcinoServicio.savePorcino(porcinoRecibido);
             return ResponseEntity.ok(porcino);
         }
+    }
+
+     /*
+     --------------------------------------------------------------------
+     --------------------------------------------------------------------
+     ----------------------------ALIMENTACION----------------------------
+     --------------------------------------------------------------------
+     --------------------------------------------------------------------
+     */
+
+    @GetMapping("/getAlimentacion")
+    public List<Alimentacion> getAlimentacion(){
+        return alimentacionServicio.getAlimentos();
+    }
+
+    @DeleteMapping("/deleteAlimentacionById/{id}")
+    public ResponseEntity<Map<String, Boolean>> deleteAlimentacionById(@PathVariable int id){
+        Alimentacion alimentacion = alimentacionServicio.findById(id);
+        if (alimentacion == null) return ResponseEntity.notFound().build();
+        this.alimentacionServicio.deleteById(id);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("Eliminado", true);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/agregarAlimentacion")
+    public Alimentacion agregarAlimentacion (@RequestBody Alimentacion alimentacion){
+        return alimentacionServicio.saveAlimentacion(alimentacion);
 
     }
+    @GetMapping("/getAlimentacionById/{id}")
+    public Alimentacion getAlimentacionById(@PathVariable int id){
+        var alimentacion =  alimentacionServicio.findById(id);
+        return alimentacion;
+    }
+    @PutMapping("/editarAlimentacion/{id}")
+    public ResponseEntity<Alimentacion> editarAlimentacion(
+            @PathVariable int id,
+            @RequestBody Alimentacion alimentacionRecibido){
+        Alimentacion alimentacion =alimentacionServicio.findById(id);
+        if (alimentacion == null) return ResponseEntity.notFound().build();
+        else {
+            alimentacion.setDescripcion(alimentacionRecibido.getDescripcion());
+            alimentacion.setDosis(alimentacionRecibido.getDosis());
+            alimentacionServicio.saveAlimentacion(alimentacion);
+            return ResponseEntity.ok(alimentacion);
+        }
+    }
+
+    @GetMapping("/getAlimentacionByIdRaza")
+    public List<Alimentacion> getAlimentacionByIdRaza(@RequestBody Raza raza){
+        var lista = alimentacionServicio.findByRaza(raza);
+        return lista;
+    }
+
+    /*
+     --------------------------------------------------------------------
+     --------------------------------------------------------------------
+     -----------------------------RAZA-----------------------------------
+     --------------------------------------------------------------------
+     --------------------------------------------------------------------
+     */
+    @GetMapping("/getRaza/{descripcion}")
+    public Raza getRazaByDescripcion(@PathVariable String descripcion){
+        var raza = razaServicio.findByDescripcion(descripcion);
+        return raza;
+    }
+
 }

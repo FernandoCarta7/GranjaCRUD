@@ -20,11 +20,15 @@ public class PorcinoServicio implements IPorcinoServicio{
 
     @Override
     public List<Porcino> getPorcinos() {
-        return porcinoRepositorio.findAll();
+        List<Porcino> lista = porcinoRepositorio.findAll();
+        lista.sort((a,b) -> a.getRaza().getDescripcion().compareTo(b.getRaza().getDescripcion()));
+        return lista;
     }
 
     @Override
     public Porcino savePorcino(Porcino porcino) {
+        int edad = porcino.calcularEdad();
+        porcino.setEdad(edad);
         return porcinoRepositorio.save(porcino);
     }
 

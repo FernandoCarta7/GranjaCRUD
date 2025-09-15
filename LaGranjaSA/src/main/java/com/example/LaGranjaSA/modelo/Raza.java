@@ -6,21 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "alimentacion")
-public class Alimentacion {
+@Table(name = "raza")
+public class Raza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @ManyToOne
-    @JoinColumn(name = "fk_id_raza")
-    private Raza raza;
-    private String etapa;
+    private int id_raza;
     private String descripcion;
-    private float dosis;
+
 }
