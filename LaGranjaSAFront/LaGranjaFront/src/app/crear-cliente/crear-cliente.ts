@@ -26,7 +26,7 @@ export class CrearCliente {
     private clienteServicio: ClienteService,
     private router: Router
   ) {
-
+    
   }
 
   onSubmit() {
@@ -39,7 +39,7 @@ export class CrearCliente {
   }
   guardarCliente() {
     this.cliente = new Cliente(this.cedula, this.nombres, this.apellidos, this.direccion, this.telefono);
-
+    
     this.clienteServicio.addCliente(this.cliente).subscribe({
       next: (datos) => {
         this.mensaje = "Cliente guardado exitosamente ✅";

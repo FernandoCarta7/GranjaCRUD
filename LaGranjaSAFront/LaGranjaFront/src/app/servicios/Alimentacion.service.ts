@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Alimentacion } from "../model/Alimentacion";
+import { Raza } from "../model/Raza";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { Alimentacion } from "../model/Alimentacion";
 export class AlimentacionService {
     
     private urlBase = "http://localhost:8080/";
+    private urlGetByRaza = "http://localhost:8080/inicio/getAlimentacionByIdRaza"
     
     constructor (private http : HttpClient){}
 
@@ -24,4 +26,9 @@ export class AlimentacionService {
     deleteAlimentacion(id : number) : Observable<Object>{
         return this.http.delete(`${this.urlBase}/${id}`);
     }
+
+    getAlimentacionByRaza( raza : Raza ): Observable<Object>{
+        return this.http.get<Alimentacion[]>(this.urlGetByRaza)
+    }
+
 }

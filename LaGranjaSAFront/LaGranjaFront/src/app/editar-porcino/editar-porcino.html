@@ -1,7 +1,13 @@
 <br>
 <div class="container">
     <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Raza" [(ngModel)]="porcino.raza" />
+        <select class="form-select" aria-placeholder="Seleccionar raza" aria-label="Default select example"
+            [(ngModel)]="porcino.raza.descripcion">
+            <option selected>Seleccionar raza</option>
+            <option value="YORK">York</option>
+            <option value="HAMP">Hamp</option>
+            <option value="DUROC">Duroc</option>
+        </select>
         <span class="input-group-text"><i class="bi bi-person-lines-fill"></i></span>
         <input type="text" class="form-control" placeholder="Peso [kg]" [(ngModel)]="porcino.peso" />
     </div>

@@ -9,7 +9,7 @@ import { Cliente } from "../model/Cliente";
 export class ClienteService {
 
     private urlBase = "http://localhost:8080/inicio/getClientes";
-    private urlGuardarClientes = "http://localhost:8080/inicio/guardarCliente";
+    private urlGuardarClientes = "http://localhost:8080/inicio/saveCliente";
     private urlDelete = "http://localhost:8080/inicio/deleteCliente";
     private urlCliente = "http://localhost:8080/inicio/getClienteByCedula"
     private urlEditCliente = "http://localhost:8080/inicio/editarPaciente";

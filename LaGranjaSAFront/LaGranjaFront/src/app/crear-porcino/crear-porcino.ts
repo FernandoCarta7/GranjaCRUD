@@ -1,9 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { PorcinoService } from '../servicios/Porcino.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Porcino } from '../model/Porcino';
 import { FormsModule } from '@angular/forms';
+import { ClienteService } from '../servicios/Cliente.service';
+import { Cliente } from '../model/Cliente';
+import { RazaService } from '../servicios/RazaService.service';
+import { Raza } from '../model/Raza';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'crear-porcino',
@@ -12,37 +17,62 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './crear-porcino.css'
 })
 export class CrearPorcino {
-  porcino: Porcino = new Porcino();
+  porcino: Porcino;
+  public cedula: string;
 
-  public id_porcino: number;
-  public raza: String;
-  public fecha_nacimiento: Date;
-  public peso: number;
-  public edad: number;
+  public descripcion: String;
 
   public showAlert: boolean = false;
   public mensaje: string = "";
 
+  public cliente: Cliente;
+  public raza: Raza;
+
   constructor(private http: HttpClient,
     private porcinoService: PorcinoService,
-    private router: Router) {
+    private router: Router,
+    private ruta: ActivatedRoute,
+    private clienteService: ClienteService,
+    private razaService: RazaService
+
+  ) {
+    this.descripcion = "";
+    this.raza = new Raza("");
+    this.porcino = new Porcino(new Date, 0.0)
+  }
+
+  ngOnInit() {
+    this.cedula = this.ruta.snapshot.params['cedula'];
+    this.clienteService.getCliente(this.cedula).subscribe(
+      {
+        next: (dato) => this.cliente = dato,
+        error: (errores: any) => console.error(errores)
+      }
+    );
   }
   goToPorcinos() {
     this.router.navigate(['/listado-porcino'])
   }
 
   guardarPorcino() {
-   
-    this.porcinoService.addPorcino(this.porcino).subscribe({
-      next: () => {
-        this.goToPorcinos()
-        this.mensaje = "Porcino guardado exitosamente ✅";
-        this.showAlert = true;
-      }
+  this.razaService.getRaza(this.descripcion).pipe(
+    switchMap((raza) => {
+      this.porcino.raza = raza;
+      this.porcino.cliente = this.cliente;
+      return this.porcinoService.addPorcino(this.porcino);
     })
-  }
+  ).subscribe({
+    next: () => {
+      this.goToPorcinos();
+      this.mensaje = "Porcino guardado exitosamente ✅";
+      this.showAlert = true;
+    },
+    error: (err) => console.error("Error al guardar porcino", err)
+  });
+}
 
-  onSubmit(){
+
+  onSubmit() {
     this.guardarPorcino();
   }
 }

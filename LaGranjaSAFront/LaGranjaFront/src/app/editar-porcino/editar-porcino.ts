@@ -13,7 +13,6 @@ import { FormsModule } from '@angular/forms';
 export class EditarPorcino {
 
   public id_porcino: number;
-  public raza: String;
   public fecha_nacimiento: Date;
   public peso: number;
   public edad: number;
@@ -23,7 +22,7 @@ export class EditarPorcino {
     private router : Router,
     private ruta : ActivatedRoute
   ){
-
+    
   }
 
   ngOnInit() {

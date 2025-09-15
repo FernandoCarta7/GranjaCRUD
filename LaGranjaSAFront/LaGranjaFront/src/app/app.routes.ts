@@ -14,6 +14,6 @@ export const routes: Routes = [
     //Porcinos
     { path: 'listado-porcino', component: ListadoPorcino, title: 'Porcinos' },
     { path: 'editar-porcino/:id_porcino', component: EditarPorcino, title: 'Editar Porcino' },
-    { path: 'crear-porcino', component: CrearPorcino, title: 'Crear Porcino' },
+    { path: 'crear-porcino/:cedula', component: CrearPorcino, title: 'Crear Porcino' },
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
 ];

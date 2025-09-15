@@ -45,4 +45,8 @@ export class ListadoClientes {
     )
   }
 
+  goToCrearPorcino( cedula : String ){
+    this.router.navigate(['crear-porcino', cedula]);
+  }
+
 }

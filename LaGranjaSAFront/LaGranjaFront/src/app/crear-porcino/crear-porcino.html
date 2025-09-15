@@ -8,10 +8,14 @@
         <button type="button" class="btn-close" (click)="showAlert = false"></button>
     </div>
     }
-
+    <div class="container">
+        <h2>Cliente: {{cliente.nombres}}  {{cliente.apellidos}}</h2>
+        <p>Asinacion de porcino</p>
+    </div>
+    
     <div class="input-group mb-3">
         <select class="form-select" aria-placeholder="Seleccionar raza" aria-label="Default select example"
-            [(ngModel)]="porcino.raza">
+            [(ngModel)]="descripcion">
             <option selected>Seleccionar raza</option>
             <option value="YORK">York</option>
             <option value="HAMP">Hamp</option>
