@@ -1,0 +1,81 @@
+@startuml granja
+
+' Paquete modelo
+package modelo {
+    class Alimentacion {
+        - id: int
+        - descripcion: String
+        - dosis: float
+    }
+
+    class Cliente {
+        - cedula: String
+        - nombres: String
+        - apellidos: String
+        - direccion: String
+        - telefono: String
+    }
+
+    class Porcino {
+        - id_porcino: int
+        - raza: String
+        - fecha_nacimiento: int
+        - peso: float
+    }
+
+    class AlimentacionPorcino {
+        - id_alimentacion_porcino: int
+        - id_porcinoA: int
+        - id_alimentoP: int
+    }
+
+    class ClientePorcino {
+        - id_cliente_porcino: int
+        - cedula: String
+        - id_porcino: int
+    }
+}
+
+' Paquete servicio
+package servicio {
+
+    interface IAlimentacionServicio {
+        + getAlimentos(): List<Alimentacion>
+        + findById(id: int): Alimentacion
+        + saveAlimentacion(alimentacion: Alimentacion): Alimentacion
+        + deleteById(id: int): void
+    }
+
+    class AlimentacionServicio implements IAlimentacionServicio
+
+    interface IClienteServicio {
+        + getClientes(): List<Cliente>
+        + saveCliente(cliente: Cliente): Cliente
+        + findClienteById(id: String): Cliente
+        + deleteClienteById(id: String): void
+    }
+
+    class ClienteServicio implements IClienteServicio
+
+    interface IPorcinoServicio {
+        + getPorcinoById(id: int): Porcino
+        + getPorcinos(): List<Porcino>
+        + savePorcino(porcino: Porcino): Porcino
+        + deletePorcinoById(id: int): void
+    }
+
+    class PorcinoServicio implements IPorcinoServicio
+}
+
+' Relaciones entre modelos
+AlimentacionPorcino --> Alimentacion
+AlimentacionPorcino --> Porcino
+ClientePorcino --> Cliente
+ClientePorcino --> Porcino
+
+' Relaciones servicios con entidades
+IAlimentacionServicio --> Alimentacion
+IClienteServicio --> Cliente
+IPorcinoServicio --> Porcino
+
+@enduml
