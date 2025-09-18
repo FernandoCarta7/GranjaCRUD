@@ -1,9 +1,7 @@
 package com.example.LaGranjaSA.servicio;
 
 import com.example.LaGranjaSA.modelo.Alimentacion;
-import com.example.LaGranjaSA.modelo.Raza;
 import com.example.LaGranjaSA.repositorio.AlimentoRepositorio;
-import org.hibernate.annotations.SecondaryRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +34,7 @@ public class AlimentacionServicio implements IAlimentacionServicio{
         if (alimentacion != null) alimentoRepositorio.deleteById(id);
     }
 
-    public List<Alimentacion> findByRaza(Raza raza) {
-        return alimentoRepositorio.findByRaza(raza);
+    public List<Alimentacion> findByRaza(int id_raza) {
+        return alimentoRepositorio.findByRaza_IdRaza(id_raza);
     }
 }

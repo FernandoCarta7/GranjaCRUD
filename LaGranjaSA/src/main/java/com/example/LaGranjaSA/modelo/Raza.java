@@ -16,7 +16,8 @@ import java.time.LocalDate;
 public class Raza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_raza;
+    @Column(name = "id_raza")
+    private int idRaza;
     private String descripcion;
 
 }
