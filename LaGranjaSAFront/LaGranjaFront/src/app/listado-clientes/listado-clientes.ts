@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ClienteService } from '../servicios/Cliente.service';
 import { Router } from '@angular/router';
 import { CrearCliente } from "../crear-cliente/crear-cliente";
+import { PorcinoService } from '../servicios/Porcino.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { CrearCliente } from "../crear-cliente/crear-cliente";
 })
 export class ListadoClientes {
   clientes: Cliente[];
-  constructor(private clienteService: ClienteService, private router: Router) { }
+  constructor(private clienteService: ClienteService, private router: Router, private porcinoService : PorcinoService) { }
 
   goToClientes() {
     this.router.navigate(['/listado-clientes']);
@@ -37,6 +38,7 @@ export class ListadoClientes {
   }
 
   deleteCliente(cedula: String) {
+    
     this.clienteService.deleteCliente(cedula).subscribe(
       {
         next: () => this.getListClientes()

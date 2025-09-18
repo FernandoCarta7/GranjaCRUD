@@ -11,11 +11,12 @@ export class AlimentacionService {
     
     private urlBase = "http://localhost:8080/";
     private urlGetByRaza = "http://localhost:8080/inicio/getAlimentacionByIdRaza"
+    private urlGet = "http://localhost:8080/inicio/getAlimentacion"
     
     constructor (private http : HttpClient){}
 
     getAlimentacion() : Observable<Alimentacion []> {
-        return this.http.get<Alimentacion[]>(this.urlBase);
+        return this.http.get<Alimentacion[]>(this.urlGet);
     }
     addAlimentacion( alimentacion : Alimentacion) : Observable <Object>{
         return this.http.post(this.urlBase, alimentacion);
@@ -27,8 +28,8 @@ export class AlimentacionService {
         return this.http.delete(`${this.urlBase}/${id}`);
     }
 
-    getAlimentacionByRaza( raza : Raza ): Observable<Object>{
-        return this.http.get<Alimentacion[]>(this.urlGetByRaza)
+    getAlimentacionByRaza( id_raza : number ): Observable<Alimentacion []>{
+        return this.http.get<Alimentacion[]>(`${this.urlGetByRaza}/${id_raza}`)
     }
 
 }

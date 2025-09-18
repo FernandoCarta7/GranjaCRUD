@@ -19,4 +19,7 @@ export class NavBar {
   goToPorcinos() {
     this.router.navigate(['/listado-porcino']);
   }
+  goToAlimentacion() {
+    this.router.navigate(['listar-alimentacion']);
+  }
 }
