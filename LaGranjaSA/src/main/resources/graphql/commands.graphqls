@@ -1,0 +1,132 @@
+query {
+  getClientes {
+    cedula
+    nombres
+    apellidos
+  }
+}
+
+query {
+  getClienteById(cedula: "1010101010") {
+    cedula
+    nombres
+    telefono
+  }
+}
+
+query {
+  getPorcinos {
+    id_porcino
+    fecha_nacimiento
+    peso
+    edad
+    raza {
+      descripcion
+    }
+    cliente {
+      nombres
+      apellidos
+    }
+  }
+}
+
+query {
+  getPorcinoById(id: 123) {
+    id_porcino
+    fecha_nacimiento
+    peso
+    raza {
+      descripcion
+    }
+  }
+}
+
+query {
+  getAlimentaciones {
+    id
+    etapa
+    descripcion
+    dosis
+    raza {
+      descripcion
+    }
+  }
+}
+
+query {
+  getAlimentacionById(id: 1) {
+    id
+    etapa
+    dosis
+  }
+}
+
+mutation {
+  saveCliente(
+    cliente: {
+      cedula: "1010101010"
+      nombres: "Juan"
+      apellidos: "Perez"
+      direccion: "Calle 100 # 50-25"
+      telefono: "3001234567"
+    }
+  ) {
+    cedula
+    nombres
+    apellidos
+    telefono
+  }
+}
+
+mutation {
+  deleteCliente(cedula: "1010101010")
+}
+
+mutation {
+  savePorcino(
+    porcino: {
+      id_porcino: "123"
+      fecha_nacimiento: "2024-05-15"
+      peso: 85.5
+      cliente: {
+        cedula: "1010101010"
+      }
+      raza: {
+        idRaza: "1"
+      }
+    }
+  ) {
+    id_porcino
+    fecha_nacimiento
+    peso
+    cliente {
+      nombres
+    }
+  }
+}
+
+mutation {
+  deletePorcino(id: 123)
+}
+
+mutation {
+  saveAlimentacion(
+    alimentacion: {
+      id: "1"
+      raza: {
+        idRaza: "1"
+      }
+      etapa: "Crecimiento"
+      descripcion: "Dieta alta en proteinas"
+      dosis: 2.5
+    }
+  ) {
+    id
+    etapa
+    dosis
+  }
+}
+
+mutation {
+  deleteAlimentacion(id: 1)
+}

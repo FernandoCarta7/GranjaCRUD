@@ -1,0 +1,103 @@
+# Definición de los tipos de datos (models)
+
+type Cliente {
+    cedula: ID!
+    nombres: String!
+    apellidos: String!
+    direccion: String!
+    telefono: String!
+}
+
+type Raza {
+    idRaza: ID!
+    descripcion: String!
+}
+
+type Porcino {
+    id_porcino: ID!
+    fecha_nacimiento: String! # Usa String para representar LocalDate en GraphQL
+    peso: Float!
+    cliente: Cliente!
+    raza: Raza!
+    edad: Int!
+}
+
+type Alimentacion {
+    id: ID!
+    raza: Raza!
+    etapa: String!
+    descripcion: String!
+    dosis: Float!
+}
+
+# Tipos de entrada para las mutaciones (para crear/actualizar)
+
+input ClienteInput {
+    cedula: ID
+    nombres: String
+    apellidos: String
+    direccion: String
+    telefono: String
+}
+
+input PorcinoInput {
+    id_porcino: ID
+    fecha_nacimiento: String
+    peso: Float
+    cliente: ClienteInput
+    raza: RazaInput
+    edad: Int
+}
+
+input RazaInput {
+    idRaza: ID
+    descripcion: String
+}
+
+input AlimentacionInput {
+    id: ID
+    raza: RazaInput
+    etapa: String
+    descripcion: String
+    dosis: Float
+}
+
+# Definición de las Queries (para leer datos)
+
+type Query {
+    # Queries para Cliente
+    getClientes: [Cliente!]!
+    getClienteById(cedula: ID!): Cliente
+
+    # Queries para Raza
+    getRazaByIdRaza(idRaza: ID!): Raza
+    getRazaByDescripcion(descripcion: String!): Raza
+
+    # Queries para Porcino
+    getPorcinos: [Porcino!]!
+    getPorcinoById(id_porcino: ID!): Porcino
+
+    # Queries para Alimentacion
+    getAlimentaciones: [Alimentacion!]!
+    getAlimentacionById(id: ID!): Alimentacion
+}
+
+# Definición de las Mutations (para escribir/modificar datos)
+
+type Mutation {
+    # Mutations para Cliente
+    saveCliente(cliente: ClienteInput!): Cliente
+    deleteCliente(cedula: ID!): Boolean!
+
+    # Mutations para Raza
+    saveRaza(raza: RazaInput!): Raza
+    deleteRaza(idRaza: ID!): Boolean!
+    
+    # Mutations para Porcino
+    savePorcino(porcino: PorcinoInput!): Porcino
+    deletePorcino(id_porcino: ID!): Boolean!
+
+    # Mutations para Alimentacion
+    saveAlimentacion(alimentacion: AlimentacionInput!): Alimentacion
+    deleteAlimentacion(id: ID!): Boolean!
+}
