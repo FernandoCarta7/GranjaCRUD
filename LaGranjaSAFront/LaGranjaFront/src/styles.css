@@ -44,3 +44,7 @@ body {
 .btnVerdeF {
     background-color: var(--color-verde-fluorecente) !important;
 }
+span{
+    color: var(--color-primario);
+    font-style: italic;
+}

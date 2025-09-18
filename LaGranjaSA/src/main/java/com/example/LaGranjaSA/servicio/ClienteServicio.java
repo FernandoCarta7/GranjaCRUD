@@ -2,6 +2,7 @@ package com.example.LaGranjaSA.servicio;
 
 import com.example.LaGranjaSA.modelo.Cliente;
 import com.example.LaGranjaSA.repositorio.ClienteRepositorio;
+import com.example.LaGranjaSA.repositorio.PorcinoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class ClienteServicio implements IClienteServicio {
 
     @Override
     public void deleteClienteById(String id) {
+
         Cliente cliente = clienteRepositorio.findById(id).orElse(null);
         if (cliente != null) clienteRepositorio.deleteById(id);
     }

@@ -38,4 +38,5 @@ export class PorcinoService {
     deletePorcino(id_porcino : number) : Observable<Object>{
         return this.http.delete(`${this.urlDelete}/${id_porcino}`);
     }
+    
 }

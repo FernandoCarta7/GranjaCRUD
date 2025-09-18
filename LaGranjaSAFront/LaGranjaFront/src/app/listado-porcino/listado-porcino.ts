@@ -3,6 +3,7 @@ import { PorcinoService } from '../servicios/Porcino.service';
 import { Router } from '@angular/router';
 import { Porcino } from '../model/Porcino';
 import { CommonModule } from '@angular/common';
+import { Raza } from '../model/Raza';
 
 
 @Component({
@@ -23,11 +24,9 @@ export class ListadoPorcino {
   }
 
   private getListPorcinos() {
-    this.porcinoService.getPorcinos().subscribe(
-      (response => {
-        this.porcinos = response
-      })
-    )
+    this.porcinoService.getPorcinos().subscribe({
+      next: (datos) => this.porcinos = datos
+    })
   }
 
   editPorcino(id_porcino: number) {
@@ -40,8 +39,11 @@ export class ListadoPorcino {
     })
   }
 
-  goToCrearPorcino(){
+  goToCrearPorcino() {
     this.router.navigate(['crear-porcino']);
+  }
+  goToAlimentos(raza: number) {
+    this.router.navigate(['listar-alimentacion', raza]);
   }
 
 }

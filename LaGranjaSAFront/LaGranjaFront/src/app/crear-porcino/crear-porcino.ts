@@ -37,7 +37,7 @@ export class CrearPorcino {
 
   ) {
     this.descripcion = "";
-    this.raza = new Raza("");
+    //this.raza = new Raza("",null);
     this.porcino = new Porcino(new Date, 0.0)
   }
 

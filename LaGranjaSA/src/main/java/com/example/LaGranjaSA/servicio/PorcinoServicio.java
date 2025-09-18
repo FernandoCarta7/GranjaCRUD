@@ -39,4 +39,7 @@ public class PorcinoServicio implements IPorcinoServicio{
         if (porcino != null) porcinoRepositorio.deleteById(id);
 
     }
+    public void deleteAllByCliente(String cedula){
+        this.porcinoRepositorio.deleteByCliente_Cedula(cedula);
+    }
 }

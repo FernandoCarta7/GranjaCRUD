@@ -34,7 +34,7 @@ public class Porcino {
             return 0;
 
         }
-        return Period.between(fecha_nacimiento, LocalDate.now()).getDays();
+        return Period.between(fecha_nacimiento, LocalDate.now()).getYears();
     }
 
 }

@@ -57,6 +57,7 @@ public class InicioController {
     public ResponseEntity<Map<String, Boolean>> deleteCliente(@PathVariable String cedula){
         Cliente cliente = clienteServicio.findClienteById(cedula);
         if (cliente == null) return ResponseEntity.notFound().build();
+        this.porcinoServicio.deleteAllByCliente(cedula);
         this.clienteServicio.deleteClienteById(cedula);
         Map<String, Boolean> response = new HashMap<>();
         response.put("Eliminado", true);
@@ -69,6 +70,7 @@ public class InicioController {
         Cliente cliente = this.clienteServicio.findClienteById(cedula);
         if (cliente == null) return ResponseEntity.notFound().build();
         else {
+
             cliente.setApellidos(clienteRecibido.getApellidos());
             cliente.setNombres(clienteRecibido.getNombres());
             cliente.setDireccion(clienteRecibido.getDireccion());
@@ -88,7 +90,8 @@ public class InicioController {
      */
     @GetMapping("/getPorcinos")
     public List<Porcino> getPorcinos(){
-        return porcinoServicio.getPorcinos();
+        var lista = porcinoServicio.getPorcinos();
+        return lista;
     }
 
     @DeleteMapping("/deletePorcinoById/{id_porcino}")
@@ -174,9 +177,9 @@ public class InicioController {
         }
     }
 
-    @GetMapping("/getAlimentacionByIdRaza")
-    public List<Alimentacion> getAlimentacionByIdRaza(@RequestBody Raza raza){
-        var lista = alimentacionServicio.findByRaza(raza);
+    @GetMapping("/getAlimentacionByIdRaza/{id_raza}")
+    public List<Alimentacion> getAlimentacionByIdRaza(@PathVariable int id_raza){
+        var lista = alimentacionServicio.findByRaza(id_raza);
         return lista;
     }
 

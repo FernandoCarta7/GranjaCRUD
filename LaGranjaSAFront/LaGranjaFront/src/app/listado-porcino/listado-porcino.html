@@ -14,6 +14,7 @@
         <tbody>
             @for (porcino of porcinos; track $index) {
             <tr>
+                
                 <td>
                     <button class="btn colorAzul margin2" (click)="editPorcino(porcino.id_porcino)">
                         <i class="bi bi-pencil"></i>
@@ -21,18 +22,19 @@
                     <button class="btn rojoDanger margin2" (click)="deletePorcino(porcino.id_porcino)">
                         <i class="bi bi-trash3"></i>
                     </button>
+
                 </td>
                 <td>{{ porcino.raza.descripcion }}</td> <!--descripcion de la raza-->
                 <td>{{ porcino.fecha_nacimiento }}</td>
                 <td> {{ porcino.edad }} </td>
                 <td>{{ porcino.peso }}</td>
                 <td> {{ porcino.cliente.nombres }} {{ " " }}{{ porcino.cliente.apellidos }} </td>
+                
             </tr>
             }
 
         </tbody>
     </table>
-    <button class="btn colorAzul" (click)="goToCrearPorcino()" disabled><i class="bi bi-plus"></i> Nuevo
-        porcino</button>
+    
 </div>
 <!-- Scrollable modal -->
