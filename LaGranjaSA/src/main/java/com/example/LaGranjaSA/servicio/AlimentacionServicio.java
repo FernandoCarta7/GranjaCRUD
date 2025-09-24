@@ -19,8 +19,8 @@ public class AlimentacionServicio implements IAlimentacionServicio{
     }
 
     @Override
-    public Alimentacion findById(int id) {
-        return alimentoRepositorio.findById(id).orElse(null);
+    public Alimentacion findById(int id_alimentacion) {
+        return alimentoRepositorio.findById(id_alimentacion).orElse(null);
     }
 
     @Override
@@ -29,12 +29,12 @@ public class AlimentacionServicio implements IAlimentacionServicio{
     }
 
     @Override
-    public void deleteById(int id) {
-        Alimentacion alimentacion = alimentoRepositorio.findById(id).orElse(null);
-        if (alimentacion != null) alimentoRepositorio.deleteById(id);
+    public void deleteById(int id_alimentacion) {
+        Alimentacion alimentacion = alimentoRepositorio.findById(id_alimentacion).orElse(null);
+        if (alimentacion != null) alimentoRepositorio.deleteById(id_alimentacion);
     }
 
-    public List<Alimentacion> findByRaza(int id_raza) {
-        return alimentoRepositorio.findByRaza_IdRaza(id_raza);
+    public List<Alimentacion> findByRaza(int idRaza) {
+        return alimentoRepositorio.findByRaza_IdRaza(idRaza);
     }
 }

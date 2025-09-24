@@ -4,7 +4,7 @@ package com.example.LaGranjaSA.input;
 import com.example.LaGranjaSA.input.RazaInput; // Corrected import
 
 public record AlimentacionInput(
-    String id,
+    String id_alimentacion,
     RazaInput raza, // Corrected type
     String etapa,
     String descripcion,

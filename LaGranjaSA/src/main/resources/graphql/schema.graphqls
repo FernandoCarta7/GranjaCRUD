@@ -23,7 +23,7 @@ type Porcino {
 }
 
 type Alimentacion {
-    id: ID!
+    id_alimentacion: ID!
     raza: Raza!
     etapa: String!
     descripcion: String!
@@ -55,7 +55,7 @@ input RazaInput {
 }
 
 input AlimentacionInput {
-    id: ID
+    id_alimentacion: ID
     raza: RazaInput
     etapa: String
     descripcion: String
@@ -70,7 +70,8 @@ type Query {
     getClienteById(cedula: ID!): Cliente
 
     # Queries para Raza
-    getRazaByIdRaza(idRaza: ID!): Raza
+    getRazas: [Raza!]!
+    getRazaById(idRaza: ID!): Raza
     getRazaByDescripcion(descripcion: String!): Raza
 
     # Queries para Porcino
@@ -79,7 +80,7 @@ type Query {
 
     # Queries para Alimentacion
     getAlimentaciones: [Alimentacion!]!
-    getAlimentacionById(id: ID!): Alimentacion
+    getAlimentacionById(id_alimentacion: ID!): Alimentacion
 }
 
 # Definición de las Mutations (para escribir/modificar datos)
@@ -87,17 +88,21 @@ type Query {
 type Mutation {
     # Mutations para Cliente
     saveCliente(cliente: ClienteInput!): Cliente
+    updateCliente(cedula: ID!, cliente: ClienteInput!): Cliente
     deleteCliente(cedula: ID!): Boolean!
 
     # Mutations para Raza
     saveRaza(raza: RazaInput!): Raza
+    updateRaza(idRaza: ID!, raza: RazaInput!): Raza
     deleteRaza(idRaza: ID!): Boolean!
     
     # Mutations para Porcino
     savePorcino(porcino: PorcinoInput!): Porcino
+    updatePorcino(id_porcino: ID!, porcino: PorcinoInput!): Porcino
     deletePorcino(id_porcino: ID!): Boolean!
 
     # Mutations para Alimentacion
     saveAlimentacion(alimentacion: AlimentacionInput!): Alimentacion
-    deleteAlimentacion(id: ID!): Boolean!
+    updateAlimentacion(id_alimentacion: ID!, alimentacion: AlimentacionInput!): Alimentacion
+    deleteAlimentacion(id_alimentacion: ID!): Boolean!
 }

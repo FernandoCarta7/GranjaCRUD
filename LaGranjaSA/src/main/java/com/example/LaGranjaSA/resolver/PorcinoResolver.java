@@ -41,12 +41,12 @@ public class PorcinoResolver {
 
     // Mutations
     @MutationMapping
-    public Porcino savePorcino(@Argument PorcinoInput porcinoInput) {
+    public Porcino savePorcino(@Argument PorcinoInput porcino) {
         // 1. Fetch the full Cliente entity using the ID from the input
-        Cliente cliente = clienteServicio.findClienteById(porcinoInput.cliente().cedula());
+        Cliente cliente = clienteServicio.findClienteById(porcino.cliente().cedula());
 
         // 2. Fetch the full Raza entity using the ID from the input
-        Raza raza = razaServicio.findById(porcinoInput.raza().idRaza());
+        Raza raza = razaServicio.findById(porcino.raza().idRaza());
 
         // Optional: Add validation to ensure entities were found
         if (cliente == null || raza == null) {
@@ -54,15 +54,55 @@ public class PorcinoResolver {
         }
 
         // 3. Create the Porcino entity with the fetched objects
-        Porcino porcino = new Porcino();
-        porcino.setId_porcino(Integer.parseInt(porcinoInput.id_porcino()));
-        porcino.setFecha_nacimiento(LocalDate.parse(porcinoInput.fecha_nacimiento()));
-        porcino.setPeso(porcinoInput.peso());
-        porcino.setCliente(cliente);
-        porcino.setRaza(raza);
+        Porcino nuevoPorcino = new Porcino();
+        //porcino.setId_porcino(Integer.parseInt(porcinoInput.id_porcino()));
+        nuevoPorcino.setFecha_nacimiento(LocalDate.parse(porcino.fecha_nacimiento()));
+        nuevoPorcino.setPeso(porcino.peso());
+        nuevoPorcino.setCliente(cliente);
+        nuevoPorcino.setRaza(raza);
+
+        // Calcular edad automáticamente después de establecer fecha_nacimiento
+        nuevoPorcino.setEdad(nuevoPorcino.calcularEdad());
 
         // 4. Save the Porcino entity
-        return porcinoServicio.savePorcino(porcino);
+        return porcinoServicio.savePorcino(nuevoPorcino);
+    }
+
+    @MutationMapping
+    public Porcino updatePorcino(@Argument String id_porcino, @Argument PorcinoInput porcino) {
+        int id = Integer.parseInt(id_porcino);
+        Porcino porcinoExistente = porcinoServicio.getPorcinoById(id);
+        if (porcinoExistente == null) {
+            throw new RuntimeException("Porcino no encontrado con el ID: " + id_porcino);
+        }
+        
+        // Actualizar los campos del porcino
+        if (porcino.fecha_nacimiento() != null) {
+            porcinoExistente.setFecha_nacimiento(LocalDate.parse(porcino.fecha_nacimiento()));
+            // Recalcular la edad si la fecha de nacimiento ha cambiado
+            porcinoExistente.setEdad(porcinoExistente.calcularEdad());
+        }
+        if (porcino.peso() != 0.0f) {
+            porcinoExistente.setPeso(porcino.peso());
+        }
+        
+        // Actualizar las entidades relacionadas si se proporcionan
+        if (porcino.cliente() != null && porcino.cliente().cedula() != null) {
+            Cliente cliente = clienteServicio.findClienteById(porcino.cliente().cedula());
+            if (cliente == null) {
+                throw new RuntimeException("Cliente no encontrado.");
+            }
+            porcinoExistente.setCliente(cliente);
+        }
+        if (porcino.raza() != null && porcino.raza().idRaza() != null) {
+            Raza raza = razaServicio.findById(porcino.raza().idRaza());
+            if (raza == null) {
+                throw new RuntimeException("Raza no encontrada.");
+            }
+            porcinoExistente.setRaza(raza);
+        }
+
+        return porcinoServicio.savePorcino(porcinoExistente);
     }
 
     @MutationMapping

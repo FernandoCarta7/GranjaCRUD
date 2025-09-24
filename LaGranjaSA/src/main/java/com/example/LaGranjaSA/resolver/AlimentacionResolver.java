@@ -30,34 +30,63 @@ public class AlimentacionResolver {
     }
 
     @QueryMapping
-    public Alimentacion getAlimentacionById(@Argument int id) {
-        return alimentacionServicio.findById(id);
+    public Alimentacion getAlimentacionById(@Argument int id_alimentacion) {
+        return alimentacionServicio.findById(id_alimentacion);
     }
 
     // Mutations
     @MutationMapping
-    public Alimentacion saveAlimentacion(@Argument AlimentacionInput alimentacionInput) {
+    public Alimentacion saveAlimentacion(@Argument AlimentacionInput alimentacion) {
         // Buscar la entidad de Raza usando el ID del input
-        Raza raza = razaServicio.findById(alimentacionInput.raza().idRaza());
+        Raza raza = razaServicio.findById(alimentacion.raza().idRaza());
 
         // Validar que la entidad existe
         if (raza == null) {
             throw new RuntimeException("Raza no encontrada.");
         }
 
-        Alimentacion alimentacion = new Alimentacion(
-            Integer.parseInt(alimentacionInput.id()),
-            raza, // Pasar la entidad Raza completa
-            alimentacionInput.etapa(),
-            alimentacionInput.descripcion(),
-            alimentacionInput.dosis()
-        );
-        return alimentacionServicio.saveAlimentacion(alimentacion);
+        Alimentacion nuevaAlimentacion = new Alimentacion();
+        nuevaAlimentacion.setRaza(raza);
+        nuevaAlimentacion.setEtapa(alimentacion.etapa());
+        nuevaAlimentacion.setDescripcion(alimentacion.descripcion());
+        nuevaAlimentacion.setDosis(alimentacion.dosis());
+
+        return alimentacionServicio.saveAlimentacion(nuevaAlimentacion);
     }
 
     @MutationMapping
-    public Boolean deleteAlimentacion(@Argument int id) {
-        alimentacionServicio.deleteById(id);
+    public Alimentacion updateAlimentacion(@Argument int id_alimentacion, @Argument AlimentacionInput alimentacion) {
+        Alimentacion alimentacionExistente = alimentacionServicio.findById(id_alimentacion);
+        if (alimentacionExistente == null) {
+            throw new RuntimeException("Alimentacion no encontrada con el ID: " + id_alimentacion);
+        }
+
+        // Actualizar los campos de la alimentación
+        if (alimentacion.etapa() != null) {
+            alimentacionExistente.setEtapa(alimentacion.etapa());
+        }
+        if (alimentacion.descripcion() != null) {
+            alimentacionExistente.setDescripcion(alimentacion.descripcion());
+        }
+        if (alimentacion.dosis() != 0.0f) {
+            alimentacionExistente.setDosis(alimentacion.dosis());
+        }
+        
+        // Actualizar la entidad Raza si se proporciona
+        if (alimentacion.raza() != null && alimentacion.raza().idRaza() != null) {
+            Raza raza = razaServicio.findById(alimentacion.raza().idRaza());
+            if (raza == null) {
+                throw new RuntimeException("Raza no encontrada.");
+            }
+            alimentacionExistente.setRaza(raza);
+        }
+
+        return alimentacionServicio.saveAlimentacion(alimentacionExistente);
+    }
+
+    @MutationMapping
+    public Boolean deleteAlimentacion(@Argument int id_alimentacion) {
+        alimentacionServicio.deleteById(id_alimentacion);
         return true;
     }
 }

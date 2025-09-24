@@ -1,0 +1,283 @@
+
+# ================== QUERIES ==================
+
+# Clientes
+query {
+  getClientes {
+    cedula
+    nombres
+    apellidos
+    direccion
+    telefono
+  }
+}
+
+query {
+  getClienteById(cedula: "1034987623") {
+    cedula
+    nombres
+    apellidos
+    direccion
+    telefono
+  }
+}
+
+# Razas
+query {
+  getRazas {
+    idRaza
+    descripcion
+  }
+}
+
+query {
+  getRazaById(idRaza: "1") {
+    idRaza
+    descripcion
+  }
+}
+
+query {
+  getRazaByDescripcion(descripcion: "York") {
+    idRaza
+    descripcion
+  }
+}
+
+# Porcinos
+query {
+  getPorcinos {
+    id_porcino
+    fecha_nacimiento
+    peso
+    edad
+    cliente {
+      cedula
+      nombres
+    }
+    raza {
+      idRaza
+      descripcion
+    }
+  }
+}
+
+query {
+  getPorcinoById(id_porcino: "2") {
+    id_porcino
+    fecha_nacimiento
+    peso
+    edad
+    cliente {
+      cedula
+      nombres
+    }
+    raza {
+      descripcion
+    }
+  }
+}
+
+# Alimentación
+query {
+  getAlimentaciones {
+    id_alimentacion
+    etapa
+    descripcion
+    dosis
+    raza {
+      idRaza
+      descripcion
+    }
+  }
+}
+
+query {
+  getAlimentacionById(id_alimentacion: "5") {
+    id_alimentacion
+    etapa
+    descripcion
+    dosis
+    raza {
+      descripcion
+    }
+  }
+}
+
+# ================== MUTATIONS ==================
+
+# Cliente
+mutation {
+  saveCliente(cliente: {
+    cedula: "123"
+    nombres: "Juan"
+    apellidos: "Pérez"
+    direccion: "Calle 10"
+    telefono: "3001234567"
+  }) {
+    cedula
+    nombres
+    apellidos
+  }
+}
+
+mutation {
+  updateCliente(
+    cedula: "123456789"
+    cliente: {
+      nombres: "Ana Sofia"
+      direccion: "Calle 100 # 50-25"
+    }
+  ) {
+    cedula
+    nombres
+    apellidos
+    direccion
+    telefono
+  }
+}
+
+mutation {
+  updateCliente(
+    cedula: "123456789"
+    cliente: {
+      telefono: "3109876543"
+    }
+  ) {
+    cedula
+    nombres
+    apellidos
+    direccion
+    telefono
+  }
+}
+
+mutation {
+  deleteCliente(cedula: "123")
+}
+
+# Raza
+mutation {
+  saveRaza(raza: {
+    descripcion: "Yorkshire"
+  }) {
+    idRaza
+    descripcion
+  }
+}
+
+mutation {
+  updateRaza(
+    idRaza: "1"
+    raza: {
+      descripcion: "Yorkshire-mejorada"
+    }
+  ) {
+    idRaza
+    descripcion
+  }
+}
+
+mutation {
+  deleteRaza(idRaza: "4")
+}
+
+# Porcino
+mutation {
+  savePorcino(porcino: {
+    fecha_nacimiento: "2022-05-01"
+    peso: 120.5
+    edad: 2
+    cliente: {
+      cedula: "1034987623"
+    }
+    raza: {
+      idRaza: "1"
+    }
+  }) {
+    id_porcino
+    peso
+    cliente {
+      nombres
+    }
+    raza {
+      descripcion
+    }
+  }
+}
+
+mutation {
+  updatePorcino(
+    id_porcino: "101"
+    porcino: {
+      peso: 150.75
+      cliente: {
+        cedula: "987654321"
+      }
+    }
+  ) {
+    id_porcino
+    peso
+    cliente {
+      cedula
+      nombres
+    }
+    raza {
+      idRaza
+      descripcion
+    }
+  }
+}
+
+mutation {
+  updatePorcino(
+    id_porcino: "101"
+    porcino: {
+      fecha_nacimiento: "2024-05-15"
+    }
+  ) {
+    id_porcino
+    fecha_nacimiento
+    edad
+  }
+}
+
+mutation {
+  deletePorcino(id_porcino: "1004")
+}
+
+# Alimentación
+mutation {
+  saveAlimentacion(alimentacion: {
+    etapa: "Engorde"
+    descripcion: "Balanceado de alto contenido proteico"
+    dosis: 2.5
+    raza: {
+      idRaza: "1"
+    }
+  }) {
+    id_alimentacion
+    etapa
+    descripcion
+    dosis
+  }
+}
+
+mutation {
+  updateAlimentacion(
+    id_alimentacion: 1
+    alimentacion: {
+      descripcion: "Pienso para crecimiento con vitaminas extra"
+      dosis: 5.5
+    }
+  ) {
+    id_alimentacion
+    etapa
+    descripcion
+    dosis
+  }
+}
+
+mutation {
+  deleteAlimentacion(id_alimentacion: "11")
+}

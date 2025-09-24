@@ -33,14 +33,38 @@ public class ClienteResolver {
     // Mutations
     @MutationMapping
     public Cliente saveCliente(@Argument ClienteInput cliente) {
-        Cliente nuevoCliente = new Cliente(
-            cliente.cedula(), 
-            cliente.nombres(), 
-            cliente.apellidos(), 
-            cliente.direccion(), 
-            cliente.telefono()
-        );
+        Cliente nuevoCliente = new Cliente();
+        nuevoCliente.setCedula(cliente.cedula());
+        nuevoCliente.setNombres(cliente.nombres());
+        nuevoCliente.setApellidos(cliente.apellidos());
+        nuevoCliente.setDireccion(cliente.direccion());
+        nuevoCliente.setTelefono(cliente.telefono());
+        
         return clienteServicio.saveCliente(nuevoCliente);
+    }
+
+    @MutationMapping
+    public Cliente updateCliente(@Argument String cedula, @Argument ClienteInput cliente) {
+        Cliente clienteExistente = clienteServicio.findClienteById(cedula);
+        if (clienteExistente == null) {
+            throw new RuntimeException("Cliente no encontrado con la cédula: " + cedula);
+        }
+
+        // Actualizar los campos del cliente existente
+        if (cliente.nombres() != null) {
+            clienteExistente.setNombres(cliente.nombres());
+        }
+        if (cliente.apellidos() != null) {
+            clienteExistente.setApellidos(cliente.apellidos());
+        }
+        if (cliente.direccion() != null) {
+            clienteExistente.setDireccion(cliente.direccion());
+        }
+        if (cliente.telefono() != null) {
+            clienteExistente.setTelefono(cliente.telefono());
+        }
+        
+        return clienteServicio.saveCliente(clienteExistente);
     }
 
     @MutationMapping

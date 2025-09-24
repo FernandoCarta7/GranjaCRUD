@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Alimentacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_alimentacion;
 
     @ManyToOne
     @JoinColumn(name = "fk_id_raza")
