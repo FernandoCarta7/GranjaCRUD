@@ -30,7 +30,7 @@ export class ListarAlimentacion {
     })
   }
   getAlimentos(){
-    this.alimentacionService.getAlimentacion().subscribe({
+    this.alimentacionService.getAlimentacionGraphQL().subscribe({
       next: (datos) => this.alimentos = datos
     })
   }
