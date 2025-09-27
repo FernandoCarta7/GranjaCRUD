@@ -80,7 +80,7 @@ query {
 
 # Alimentación
 query {
-  getAlimentaciones {
+  getAlimentacion {
     id_alimentacion
     etapa
     descripcion

@@ -25,8 +25,9 @@ public class AlimentacionResolver {
 
     // Queries
     @QueryMapping
-    public List<Alimentacion> getAlimentaciones() {
-        return alimentacionServicio.getAlimentos();
+    public List<Alimentacion> getAlimentacion() {
+        var lista = alimentacionServicio.getAlimentos();
+        return lista ;
     }
 
     @QueryMapping

@@ -79,7 +79,7 @@ type Query {
     getPorcinoById(id_porcino: ID!): Porcino
 
     # Queries para Alimentacion
-    getAlimentaciones: [Alimentacion!]!
+    getAlimentacion: [Alimentacion!]!
     getAlimentacionById(id_alimentacion: ID!): Alimentacion
 }
 
