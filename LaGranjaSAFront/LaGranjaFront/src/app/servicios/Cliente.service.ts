@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Cliente } from "../model/Cliente";
+import { Apollo, gql } from "apollo-angular";
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,7 @@ export class ClienteService {
     private urlDelete = "http://localhost:8080/inicio/deleteCliente";
     private urlCliente = "http://localhost:8080/inicio/getClienteByCedula"
     private urlEditCliente = "http://localhost:8080/inicio/editarPaciente";
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private apollo: Apollo) { }
 
     getCliente(cedula: String) {
         return this.http.get<Cliente>(`${this.urlCliente}/${cedula}`)
@@ -31,6 +32,29 @@ export class ClienteService {
         return this.http.delete(`${this.urlDelete}/${cedula}`);
     }
 
-
-
+    getClientesGraphQL(): Observable<Cliente[]> {
+        return this.apollo
+            .watchQuery<{ getClientes: Cliente[] }>({
+                query: gql`
+          query {
+            getClientes {
+              cedula
+              nombres
+              apellidos
+              direccion
+              telefono
+            }
+          }
+        `
+            })
+            .valueChanges.pipe(
+                map(result => {
+                    console.log('Respuesta completa de Apollo:', result);
+                    return result.data?.getClientes ?? []; // <- aquí se evita undefined
+                })
+            );
+    }
 }
+
+
+

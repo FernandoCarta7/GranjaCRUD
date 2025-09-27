@@ -15,21 +15,24 @@ import { PorcinoService } from '../servicios/Porcino.service';
 })
 export class ListadoClientes {
   clientes: Cliente[];
-  constructor(private clienteService: ClienteService, private router: Router, private porcinoService : PorcinoService) { }
+  constructor(private clienteService: ClienteService, private router: Router, private porcinoService: PorcinoService) { }
 
   goToClientes() {
     this.router.navigate(['/listado-clientes']);
   }
 
   ngOnInit() {
-
+    console.log('Consulta graphql ngOnInit')
     this.getListClientes();
   }
   private getListClientes() {
-    this.clienteService.getClientes().subscribe(
-      (response => {
+    this.clienteService.getClientesGraphQL().subscribe(
+
+      (response : any[]) => {
+        console.log('Consulta graphql')
         this.clientes = response
-      })
+        console.log(this.clientes)
+      }
     )
   }
 
@@ -38,7 +41,7 @@ export class ListadoClientes {
   }
 
   deleteCliente(cedula: String) {
-    
+
     this.clienteService.deleteCliente(cedula).subscribe(
       {
         next: () => this.getListClientes()
@@ -47,7 +50,7 @@ export class ListadoClientes {
     )
   }
 
-  goToCrearPorcino( cedula : String ){
+  goToCrearPorcino(cedula: String) {
     this.router.navigate(['crear-porcino', cedula]);
   }
 
