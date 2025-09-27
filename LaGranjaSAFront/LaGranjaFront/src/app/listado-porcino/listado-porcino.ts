@@ -24,7 +24,7 @@ export class ListadoPorcino {
   }
 
   private getListPorcinos() {
-    this.porcinoService.getPorcinos().subscribe({
+    this.porcinoService.getPorcinosGraphQL().subscribe({
       next: (datos) => this.porcinos = datos
     })
   }
