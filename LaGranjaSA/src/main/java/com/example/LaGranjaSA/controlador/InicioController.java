@@ -1,5 +1,11 @@
 package com.example.LaGranjaSA.controlador;
 
+import com.example.LaGranjaSA.servicio.ClienteServicio;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+
+
 import com.example.LaGranjaSA.modelo.*;
 import com.example.LaGranjaSA.servicio.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
 @RestController
 @RequestMapping("inicio")
-@CrossOrigin(value = "http://localhost:4200")
+@CrossOrigin(value = "http://localhost:4200")**/
 public class InicioController {
 
-    @Autowired
-    ClienteServicio  clienteServicio;
-
+  /**
+   * @Autowired
+   * ClienteServicio clienteServicio;
     @Autowired
     PorcinoServicio porcinoServicio;
 
@@ -26,7 +32,7 @@ public class InicioController {
 
     @Autowired
     RazaServicio razaServicio;
-
+**/
     /*
     --------------------------------------------------------------------
     --------------------------------------------------------------------
@@ -34,7 +40,7 @@ public class InicioController {
     --------------------------------------------------------------------
     --------------------------------------------------------------------
      */
-
+/**
     @GetMapping("/getClientes")
     public List<Cliente> getClientes(){
         return clienteServicio.getClientes();
@@ -79,7 +85,7 @@ public class InicioController {
             return ResponseEntity.ok(cliente);
         }
 
-    }
+    }**/
 
     /*
      --------------------------------------------------------------------
@@ -88,7 +94,7 @@ public class InicioController {
      --------------------------------------------------------------------
      --------------------------------------------------------------------
      */
-    @GetMapping("/getPorcinos")
+   /**@GetMapping("/getPorcinos")
     public List<Porcino> getPorcinos(){
         var lista = porcinoServicio.getPorcinos();
         return lista;
@@ -129,7 +135,7 @@ public class InicioController {
             return ResponseEntity.ok(porcino);
         }
     }
-
+**/
      /*
      --------------------------------------------------------------------
      --------------------------------------------------------------------
@@ -137,7 +143,7 @@ public class InicioController {
      --------------------------------------------------------------------
      --------------------------------------------------------------------
      */
-
+/**
     @GetMapping("/getAlimentacion")
     public List<Alimentacion> getAlimentacion(){
         return alimentacionServicio.getAlimentos();
@@ -182,7 +188,7 @@ public class InicioController {
         var lista = alimentacionServicio.findByRaza(id_raza);
         return lista;
     }
-
+**/
     /*
      --------------------------------------------------------------------
      --------------------------------------------------------------------
@@ -190,10 +196,9 @@ public class InicioController {
      --------------------------------------------------------------------
      --------------------------------------------------------------------
      */
-    @GetMapping("/getRaza/{descripcion}")
+    /**@GetMapping("/getRaza/{descripcion}")
     public Raza getRazaByDescripcion(@PathVariable String descripcion){
         var raza = razaServicio.findByDescripcion(descripcion);
         return raza;
-    }
-
+    }*/
 }
