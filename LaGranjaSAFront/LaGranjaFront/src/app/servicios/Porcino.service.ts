@@ -17,6 +17,8 @@ export class PorcinoService {
     private agregarPorcino = "http://localhost:8080/inicio/agregarPorcino"
     //editarPorcino
     private urlEditarPorcino = "http://localhost:8080/inicio/editarPorcino";
+    private urlGraphQL = "http://localhost:8080/graphql";
+
     constructor(private http: HttpClient, private apollo: Apollo) { }
 
     getPorcinoById(id_porcino: number) {
@@ -40,6 +42,9 @@ export class PorcinoService {
     deletePorcino(id_porcino: number): Observable<Object> {
         return this.http.delete(`${this.urlDelete}/${id_porcino}`);
     }
+    /*--------------------------------------------------------*/
+    /*--------------------GRAPHQL Porcinos--------------------*/
+    /*--------------------------------------------------------*/
     getPorcinosGraphQL(): Observable<Porcino[]> {
         return this.apollo
             .watchQuery<{ getPorcinos: Porcino[] }>({
@@ -69,4 +74,41 @@ export class PorcinoService {
                 })
             );
     }
+
+    updatePorcinoGraphQL(id_porcino: number, porcinoInput: Porcino): Observable<Porcino> {
+        return this.apollo.mutate({
+            mutation: gql`
+        mutation ($id_porcino: ID!, $porcino: PorcinoInput!) {
+          updatePorcino(id_porcino: $id_porcino, porcino: $porcino) {
+            id_porcino
+            fecha_nacimiento
+            peso
+            edad
+            raza {
+              idRaza
+              descripcion
+            }
+            cliente {
+              cedula
+              nombres
+            }
+          }
+        }
+      `,
+            variables: {
+                id_porcino: id_porcino,
+                porcino: porcinoInput
+            },
+            context: {
+                uri: this.urlGraphQL
+            }
+        }).pipe(
+            map((result: any) => result.data.updatePorcino)
+        );
+    }
+
+
+    /*------------------------------------------------------------*/
+    /*--------------------Fin GRAPHQL Porcinos--------------------*/
+    /*------------------------------------------------------------*/
 }

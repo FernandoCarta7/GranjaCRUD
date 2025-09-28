@@ -16,7 +16,7 @@ export class EditarPorcino {
   public fecha_nacimiento: Date;
   public peso: number;
   public edad: number;
-  public porcino;
+  public porcino : Porcino;
   constructor( 
     private porcinoService : PorcinoService,
     private router : Router,
@@ -43,7 +43,9 @@ export class EditarPorcino {
   }
   guardarPorcino(){
     console.log(this.porcino)
-    this.porcinoService.editPorcino(this.id_porcino, this.porcino).subscribe({
+    this.porcino.peso = Number(this.porcino.peso);
+    this.porcino.edad = Number(this.porcino.edad);
+    this.porcinoService.updatePorcinoGraphQL(this.id_porcino, this.porcino).subscribe({
       next : () => this.goToListadoPorcino()
     })
     

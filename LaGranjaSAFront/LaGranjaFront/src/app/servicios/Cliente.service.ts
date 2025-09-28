@@ -32,8 +32,9 @@ export class ClienteService {
     deleteCliente(cedula: String): Observable<Object> {
         return this.http.delete(`${this.urlDelete}/${cedula}`);
     }
-
+    /*--------------------------------------------------------*/
     /*--------------------GRAPHQL Clientes--------------------*/
+    /*--------------------------------------------------------*/
 
     getClientesGraphQL(): Observable<Cliente[]> {
         return this.apollo
@@ -99,7 +100,7 @@ export class ClienteService {
         );
     }
 
-    
+
     updateClienteGraphQL(cedula: String, cliente: any): Observable<any> {
         return this.apollo.mutate({
             mutation: gql`
@@ -124,5 +125,8 @@ export class ClienteService {
             map((result: any) => result.data.updateCliente)
         );
     }
+    /*--------------------------------------------------------------*/
+    /*-------------------- FIN GRAPHQL Clientes--------------------*/
+    /*-------------------------------------------------------------*/
 
 }
