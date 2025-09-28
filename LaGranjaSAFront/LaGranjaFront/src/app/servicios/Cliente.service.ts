@@ -40,16 +40,16 @@ export class ClienteService {
         return this.apollo
             .watchQuery<{ getClientes: Cliente[] }>({
                 query: gql`
-          query {
-            getClientes {
-              cedula
-              nombres
-              apellidos
-              direccion
-              telefono
-            }
-          }
-        `
+                    query {
+                        getClientes {
+                            cedula
+                            nombres
+                            apellidos
+                            direccion
+                            telefono
+                            }
+                    }
+                    `
             })
             .valueChanges.pipe(
                 map(result => {
@@ -58,6 +58,9 @@ export class ClienteService {
                 })
             );
     }
+
+
+
     saveCliente(cliente: Cliente): Observable<any> {
         return this.apollo.mutate({
             mutation: gql`
