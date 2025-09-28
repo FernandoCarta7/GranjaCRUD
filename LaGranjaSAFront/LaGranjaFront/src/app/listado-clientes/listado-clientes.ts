@@ -42,7 +42,7 @@ export class ListadoClientes {
 
   deleteCliente(cedula: String) {
 
-    this.clienteService.deleteCliente(cedula).subscribe(
+    this.clienteService.deleteClienteGraphQL(cedula).subscribe(
       {
         next: () => this.getListClientes()
 

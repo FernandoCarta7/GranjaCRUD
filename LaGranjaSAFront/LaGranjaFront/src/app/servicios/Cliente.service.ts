@@ -79,5 +79,24 @@ export class ClienteService {
         );
     }
 
+    deleteClienteGraphQL(cedula: String): Observable<any> {
+        return this.apollo.mutate({
+            mutation: gql`
+      mutation ($cedula: String!) {
+        deleteCliente(cedula: $cedula)
+      }
+    `,
+            variables: {
+                cedula: cedula
+            },
+            context: {
+                uri: this.urlGraphQL,
+            },
+        }).pipe(
+            map((result: any) => result.data.deleteCliente)
+        );
+    }
+
+
 
 }
