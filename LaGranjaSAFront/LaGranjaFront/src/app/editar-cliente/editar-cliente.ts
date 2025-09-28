@@ -43,7 +43,7 @@ export class EditarCliente {
   }
   guardarCliente() {
     console.log('Cedula: ' + this.cedula)
-    this.clienteServicio.editCliente(this.cedula, this.cliente).subscribe(
+    this.clienteServicio.updateClienteGraphQL(this.cedula, this.cliente).subscribe(
       {
         next: () => this.goToClientes(),
         error: (errores) => console.error(errores)

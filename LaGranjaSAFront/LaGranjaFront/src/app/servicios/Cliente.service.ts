@@ -33,6 +33,8 @@ export class ClienteService {
         return this.http.delete(`${this.urlDelete}/${cedula}`);
     }
 
+    /*--------------------GRAPHQL Clientes--------------------*/
+
     getClientesGraphQL(): Observable<Cliente[]> {
         return this.apollo
             .watchQuery<{ getClientes: Cliente[] }>({
@@ -97,6 +99,30 @@ export class ClienteService {
         );
     }
 
-
+    
+    updateClienteGraphQL(cedula: String, cliente: any): Observable<any> {
+        return this.apollo.mutate({
+            mutation: gql`
+            mutation ($cedula: String!, $cliente: ClienteInput!) {
+                updateCliente(cedula: $cedula, cliente: $cliente) {
+                cedula
+                nombres
+                apellidos
+                direccion
+                telefono
+                }
+            }
+            `,
+            variables: {
+                cedula: cedula,
+                cliente: cliente
+            },
+            context: {
+                uri: this.urlGraphQL,
+            },
+        }).pipe(
+            map((result: any) => result.data.updateCliente)
+        );
+    }
 
 }
