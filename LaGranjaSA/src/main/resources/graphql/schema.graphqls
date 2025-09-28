@@ -1,7 +1,7 @@
 # Definición de los tipos de datos (models)
 
 type Cliente {
-    cedula: ID!
+    cedula: String!
     nombres: String!
     apellidos: String!
     direccion: String!
@@ -33,7 +33,7 @@ type Alimentacion {
 # Tipos de entrada para las mutaciones (para crear/actualizar)
 
 input ClienteInput {
-    cedula: ID
+    cedula: String
     nombres: String
     apellidos: String
     direccion: String
@@ -67,7 +67,7 @@ input AlimentacionInput {
 type Query {
     # Queries para Cliente
     getClientes: [Cliente!]!
-    getClienteById(cedula: ID!): Cliente
+    getClienteById(cedula: String!): Cliente
 
     # Queries para Raza
     getRazas: [Raza!]!
@@ -88,8 +88,8 @@ type Query {
 type Mutation {
     # Mutations para Cliente
     saveCliente(cliente: ClienteInput!): Cliente
-    updateCliente(cedula: ID!, cliente: ClienteInput!): Cliente
-    deleteCliente(cedula: ID!): Boolean!
+    updateCliente(cedula: String!, cliente: ClienteInput!): Cliente
+    deleteCliente(cedula: String!): Boolean!
 
     # Mutations para Raza
     saveRaza(raza: RazaInput!): Raza
