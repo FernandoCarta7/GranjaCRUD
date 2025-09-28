@@ -14,6 +14,7 @@ export class ClienteService {
     private urlDelete = "http://localhost:8080/inicio/deleteCliente";
     private urlCliente = "http://localhost:8080/inicio/getClienteByCedula"
     private urlEditCliente = "http://localhost:8080/inicio/editarPaciente";
+    private urlGraphQL = "http://localhost:8080/graphql";
     constructor(private http: HttpClient, private apollo: Apollo) { }
 
     getCliente(cedula: String) {
@@ -54,7 +55,29 @@ export class ClienteService {
                 })
             );
     }
+    saveCliente(cliente: Cliente): Observable<any> {
+        return this.apollo.mutate({
+            mutation: gql`
+      mutation ($cliente: ClienteInput!) {
+        saveCliente(cliente: $cliente) {
+          cedula
+          nombres
+          apellidos
+          direccion
+          telefono
+        }
+      }
+    `,
+            variables: {
+                cliente: cliente
+            },
+            context: {
+                uri: this.urlGraphQL,
+            },
+        }).pipe(
+            map((result: any) => result.data.saveCliente)
+        );
+    }
+
+
 }
-
-
-

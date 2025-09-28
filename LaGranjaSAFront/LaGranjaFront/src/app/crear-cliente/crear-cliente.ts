@@ -26,12 +26,14 @@ export class CrearCliente {
     private clienteServicio: ClienteService,
     private router: Router
   ) {
-    
+
   }
 
   onSubmit() {
+   
     console.log(this.cliente)
-    this.guardarCliente();
+    this.saveCliente();
+    this.goToClientes();
   }
 
   goToClientes() {
@@ -39,7 +41,7 @@ export class CrearCliente {
   }
   guardarCliente() {
     this.cliente = new Cliente(this.cedula, this.nombres, this.apellidos, this.direccion, this.telefono);
-    
+
     this.clienteServicio.addCliente(this.cliente).subscribe({
       next: (datos) => {
         this.mensaje = "Cliente guardado exitosamente ✅";
@@ -56,5 +58,25 @@ export class CrearCliente {
       }
     })
   }
+  saveCliente() {
+    this.cliente = new Cliente(this.cedula, this.nombres, this.apellidos, this.direccion, this.telefono);
+    console.log('Guardando cliente usando GraphQL');
+    this.clienteServicio.saveCliente(this.cliente).subscribe({
+      next: (datos) => {
+        this.mensaje = "Cliente guardado exitosamente ✅";
+        this.showAlert = true;
+
+        // ⏳ después de 2 segundos, redirige al listado
+        setTimeout(() => {
+          this.goToClientes();
+        }, 2000);
+        this.goToClientes();
+      }, error: () => {
+        this.mensaje = "❌ Error al guardar el cliente";
+        this.showAlert = true;
+      }
+    })
+  }
+
 
 }
