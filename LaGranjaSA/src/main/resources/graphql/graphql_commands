@@ -121,20 +121,15 @@ mutation {
   }
 }
 
-mutation {
-  updateCliente(
-    cedula: "123456789"
-    cliente: {
-      nombres: "Ana Sofia"
-      direccion: "Calle 100 # 50-25"
-    }
-  ) {
+mutation ($cliente: ClienteInput!) {
+  saveCliente(cliente: $cliente) {
     cedula
     nombres
     apellidos
     direccion
     telefono
   }
+}
 }
 
 mutation {

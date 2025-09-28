@@ -1,6 +1,7 @@
 package com.example.LaGranjaSA.servicio;
 
 import com.example.LaGranjaSA.modelo.Cliente;
+import com.example.LaGranjaSA.modelo.Porcino;
 import com.example.LaGranjaSA.repositorio.ClienteRepositorio;
 import com.example.LaGranjaSA.repositorio.PorcinoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class ClienteServicio implements IClienteServicio {
 
     @Autowired
     ClienteRepositorio clienteRepositorio;
+    @Autowired
+    PorcinoServicio porcinoServicio;
 
     @Override
     public List<Cliente> getClientes() {
@@ -36,6 +39,14 @@ public class ClienteServicio implements IClienteServicio {
 
     @Override
     public void deleteClienteById(String id) {
+        var listaPorcino = porcinoServicio.getPorcinosByCliente(id);
+
+        if(listaPorcino.size() > 0  ){
+            for (int i = 0; i < listaPorcino.size(); i++) {
+                int idPorcino = listaPorcino.get(i).getId_porcino();
+                porcinoServicio.deletePorcinoById(idPorcino);
+            }
+        }
 
         Cliente cliente = clienteRepositorio.findById(id).orElse(null);
         if (cliente != null) clienteRepositorio.deleteById(id);

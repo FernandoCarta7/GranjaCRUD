@@ -42,4 +42,8 @@ public class PorcinoServicio implements IPorcinoServicio{
     public void deleteAllByCliente(String cedula){
         this.porcinoRepositorio.deleteByCliente_Cedula(cedula);
     }
+    public List<Porcino> getPorcinosByCliente(String cedula){
+        List<Porcino> lista = porcinoRepositorio.findByClienteCedula(cedula);
+        return lista;
+    }
 }

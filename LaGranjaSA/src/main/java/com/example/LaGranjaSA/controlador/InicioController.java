@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-/**
+
 @RestController
 @RequestMapping("inicio")
-@CrossOrigin(value = "http://localhost:4200")**/
+@CrossOrigin(value = "http://localhost:4200")
 public class InicioController {
 
-  /**
-   * @Autowired
-   * ClienteServicio clienteServicio;
+
+   @Autowired
+   ClienteServicio clienteServicio;
     @Autowired
     PorcinoServicio porcinoServicio;
 
@@ -32,7 +32,7 @@ public class InicioController {
 
     @Autowired
     RazaServicio razaServicio;
-**/
+
     /*
     --------------------------------------------------------------------
     --------------------------------------------------------------------
@@ -40,7 +40,7 @@ public class InicioController {
     --------------------------------------------------------------------
     --------------------------------------------------------------------
      */
-/**
+
     @GetMapping("/getClientes")
     public List<Cliente> getClientes(){
         return clienteServicio.getClientes();
@@ -63,7 +63,8 @@ public class InicioController {
     public ResponseEntity<Map<String, Boolean>> deleteCliente(@PathVariable String cedula){
         Cliente cliente = clienteServicio.findClienteById(cedula);
         if (cliente == null) return ResponseEntity.notFound().build();
-        this.porcinoServicio.deleteAllByCliente(cedula);
+
+
         this.clienteServicio.deleteClienteById(cedula);
         Map<String, Boolean> response = new HashMap<>();
         response.put("Eliminado", true);
@@ -85,7 +86,7 @@ public class InicioController {
             return ResponseEntity.ok(cliente);
         }
 
-    }**/
+    }
 
     /*
      --------------------------------------------------------------------
@@ -94,7 +95,7 @@ public class InicioController {
      --------------------------------------------------------------------
      --------------------------------------------------------------------
      */
-   /**@GetMapping("/getPorcinos")
+   @GetMapping("/getPorcinos")
     public List<Porcino> getPorcinos(){
         var lista = porcinoServicio.getPorcinos();
         return lista;
@@ -135,7 +136,7 @@ public class InicioController {
             return ResponseEntity.ok(porcino);
         }
     }
-**/
+
      /*
      --------------------------------------------------------------------
      --------------------------------------------------------------------
@@ -143,7 +144,7 @@ public class InicioController {
      --------------------------------------------------------------------
      --------------------------------------------------------------------
      */
-/**
+
     @GetMapping("/getAlimentacion")
     public List<Alimentacion> getAlimentacion(){
         return alimentacionServicio.getAlimentos();
@@ -188,7 +189,7 @@ public class InicioController {
         var lista = alimentacionServicio.findByRaza(id_raza);
         return lista;
     }
-**/
+
     /*
      --------------------------------------------------------------------
      --------------------------------------------------------------------
@@ -196,9 +197,9 @@ public class InicioController {
      --------------------------------------------------------------------
      --------------------------------------------------------------------
      */
-    /**@GetMapping("/getRaza/{descripcion}")
+    @GetMapping("/getRaza/{descripcion}")
     public Raza getRazaByDescripcion(@PathVariable String descripcion){
         var raza = razaServicio.findByDescripcion(descripcion);
         return raza;
-    }*/
+    }
 }

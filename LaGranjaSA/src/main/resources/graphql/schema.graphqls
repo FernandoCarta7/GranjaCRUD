@@ -23,7 +23,7 @@ type Porcino {
 }
 
 type Alimentacion {
-    id_alimentacion: ID!
+    id: ID!
     raza: Raza!
     etapa: String!
     descripcion: String!
