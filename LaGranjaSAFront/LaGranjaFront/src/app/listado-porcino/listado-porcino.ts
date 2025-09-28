@@ -34,8 +34,8 @@ export class ListadoPorcino {
   }
 
   deletePorcino(id_porcino: number) {
-    this.porcinoService.deletePorcino(id_porcino).subscribe({
-      next: () => this.getListPorcinos()
+    this.porcinoService.deletePorcinoGraphQL(id_porcino).subscribe({
+      next: () => this.ngOnInit()
     })
   }
 

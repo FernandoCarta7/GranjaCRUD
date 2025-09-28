@@ -107,6 +107,24 @@ export class PorcinoService {
         );
     }
 
+    deletePorcinoGraphQL(id_porcino: number): Observable<boolean> {
+        return this.apollo.mutate({
+            mutation: gql`
+      mutation ($id_porcino: ID!) {
+        deletePorcino(id_porcino: $id_porcino)
+      }
+    `,
+            variables: {
+                id_porcino: id_porcino
+            },
+            context: {
+                uri: this.urlGraphQL
+            }
+        }).pipe(
+            map((result: any) => result.data.deletePorcino)
+        );
+    }
+
 
     /*------------------------------------------------------------*/
     /*--------------------Fin GRAPHQL Porcinos--------------------*/
